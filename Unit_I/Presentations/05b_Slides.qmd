@@ -12,6 +12,7 @@ format:
     highlight-style: zenburn
     code-link: false
     code-copy: true
+    controls: true
     pagetitle: "Foundations of Data Science"
     author-meta: "Jeffrey Girard"
     date-meta: "2023-02-15"
