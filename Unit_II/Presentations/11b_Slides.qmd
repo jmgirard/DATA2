@@ -1,0 +1,597 @@
+---
+format: 
+  revealjs:
+    css: ../../styles.css
+    slide-number: true
+    show-slide-number: all
+    progress: true
+    history: true
+    hash-type: number
+    theme: default
+    code-block-background: true
+    highlight-style: zenburn
+    code-link: false
+    code-copy: true
+    pagetitle: "Foundations of Data Science"
+    author-meta: "Jeffrey Girard"
+    date-meta: "2023-03-29"
+    semester: "Spring 2023"
+    course: "399/800"
+    lecture: "11b"
+---
+
+::: {.my-title}
+# [Foundations of]{.my-subtitle}<br />[Data Science]{.blue}
+
+::: {.my-grey}
+[{{< meta semester >}} | Course {{< meta course >}}]{}<br />
+[Jeffrey M. Girard | Lecture {{< meta lecture >}}]{}
+:::
+
+![](../../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
+:::
+
+## Roadmap
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+1. Relational Data
+  
+2. Basic Join Types
+
+3. Tidyverse Joins
+
+4. Activity
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li xtkehzkm trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+# Relational Data
+
+## Relational Data {.smaller}
+
+-   A set of inter-related tables is called a *relational database* (RDB)
+
+::: {.columns .pv4}
+
+::: {.column .tc width="50%"}
+
+[ratings]{.b .blue}
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+ratings <- 
+  tribble(
+    ~user, ~movie, ~rating,
+    "sing.it.sam", 1, "★☆☆☆☆",
+    "sing.it.sam", 2, "★★★★★",
+    "macattack", 1, "★★★★☆",
+    "macattack", 2, "★★☆☆☆",
+    "inzain99", 1, "★★★☆☆",
+    "inzain99", 2, "★★☆☆☆"
+  )
+kable(ratings) |> 
+  kable_styling(bootstrap_options = "striped")
+```
+
+
+:::
+
+::: {.column .tc width="50%"}
+[users]{.b .blue}
+
+```{r}
+#| echo: false
+#| message: false
+
+users <- 
+  tribble(
+    ~user, ~fname, ~lname,
+    "sing.it.sam", "Sam", "Jones",
+    "macattack", "Alex", "Mackey",
+    "inzain99", "Zain", "Baker"
+  )
+kable(users) |> 
+  kable_styling(bootstrap_options = "striped")
+```
+
+[movies]{.b .blue}
+
+```{r}
+#| echo: false
+#| message: false
+
+movies <- 
+  tribble(
+    ~id, ~title, ~year, ~genre,
+    1, "John Wick 2", 2017, "Action",
+    2, "Frozen II", 2019, "Family"
+  )
+kable(movies) |> 
+  kable_styling(bootstrap_options = "striped")
+```
+
+:::
+
+:::
+
+## Relational Data {.smaller}
+
+-   To **join** the tables into one (as below), we need to know their connections
+
+```{r}
+#| echo: false
+#| warning: false
+
+right_join(users, ratings, by = c("user" = "user")) |> 
+  left_join(movies, by = c("movie" = "id")) |> 
+  relocate(rating, .after = genre) |> 
+  kable() |> 
+  kable_styling(bootstrap_options = "striped")
+```
+
+# Relational Data
+
+## Relational Data {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column .tc width="50%"}
+- Data is [relational]{.b .blue} when one observation references another observation
+- Each observation needs to be uniquely identified by one or more variables
+  - These variables are called "keys"
+- [Natural keys]{.b .green} are meaningful
+  - e.g., `users$user`
+- [Surrogate keys]{.b .green} are meaningless
+  - e.g., `movies$id`
+- The ratings table has a double-key
+:::
+
+::: {.column .tc width="50%"}
+
+![](../../img/keys.png)
+
+:::
+
+:::
+
+# Relational Data
+
+## Relational Data {.smaller}
+
+- Let's try to guess the connections for the \{nycflights13\} package's tables.
+
+::: {.columns .pv4}
+
+::: {.column .tc width="50%"}
+
+![](../../img/flights1.png)
+:::
+
+::: {.column .tc .fragment width="50%"}
+
+![](../../img/flights2.png)
+
+:::
+
+:::
+
+
+# Basic Join Types
+
+## Basic Join Types {.smaller}
+
+- The basic joins handle non-overlapping/missing observations differently
+
+::: {.columns .pv4}
+
+::: {.column .tc width="25%"}
+
+[movies]{.b .blue}
+
+```{r}
+#| echo: false
+
+movies <- tribble(
+  ~movie, ~year,
+  1, 2020,
+  2, 2003,
+  3, 2019,
+  4, 2006,
+  5, 2003,
+  6, 2002
+)
+kable(movies)
+```
+
+:::
+
+::: {.column .tc width="25%"}
+
+[avg_ratings]{.b .blue}
+
+```{r}
+#| echo: false
+
+avg_ratings <- tribble(
+  ~movie, ~average,
+  2, 2.2,
+  3, 8.0,
+  4, 6.7,
+  5, 8.7,
+  6, 3.5,
+  7, 7.5
+)
+kable(avg_ratings)
+```
+
+:::
+
+::: {.column width="15%"}
+
+:::
+
+::: {.column width="35%"}
+
+![](../../img/joins.png)
+
+:::
+
+:::
+
+## Left Join {.smaller}
+
+::: {}
+- Left join includes all rows in [left]; those missing in [right] get NA
+:::
+
+::: {.columns .pv4}
+
+::: {.column .tc width="25%"}
+
+[movies]{.b .blue}
+
+```{r}
+#| echo: false
+
+movies <- tribble(
+  ~movie, ~year,
+  1, 2020,
+  2, 2003,
+  3, 2019,
+  4, 2006,
+  5, 2003,
+  6, 2002
+)
+kable(movies)
+```
+
+:::
+
+::: {.column .tc width="25%"}
+
+[avg_ratings]{.b .blue}
+
+```{r}
+#| echo: false
+
+avg_ratings <- tribble(
+  ~movie, ~average,
+  2, 2.2,
+  3, 8.0,
+  4, 6.7,
+  5, 8.7,
+  6, 3.5,
+  7, 7.5
+)
+kable(avg_ratings)
+```
+
+:::
+
+::: {.column .tc width="50%"}
+
+[Left Join (movies, avg_ratings)]{.b .green}
+
+```{r}
+#| echo: false
+
+df <- left_join(movies, avg_ratings, by = "movie")
+kable(df, "html") |> 
+  column_spec(3, color = ifelse(is.na(df$average), "red", "black"))
+```
+
+
+:::
+
+:::
+
+## Right Join {.smaller}
+
+::: {}
+- Right join includes all rows in [right]; those missing in [left] get NA
+:::
+
+::: {.columns .pv4}
+
+::: {.column .tc width="25%"}
+
+[movies]{.b .blue}
+
+```{r}
+#| echo: false
+
+movies <- tribble(
+  ~movie, ~year,
+  1, 2020,
+  2, 2003,
+  3, 2019,
+  4, 2006,
+  5, 2003,
+  6, 2002
+)
+kable(movies)
+```
+
+:::
+
+::: {.column .tc width="25%"}
+
+[avg_ratings]{.b .blue}
+
+```{r}
+#| echo: false
+
+avg_ratings <- tribble(
+  ~movie, ~average,
+  2, 2.2,
+  3, 8.0,
+  4, 6.7,
+  5, 8.7,
+  6, 3.5,
+  7, 7.5
+)
+kable(avg_ratings)
+```
+
+:::
+
+::: {.column .tc width="50%"}
+
+[Right Join (movies, avg_ratings)]{.b .green}
+
+```{r}
+#| echo: false
+
+df <- right_join(movies, avg_ratings, by = "movie")
+kable(df, "html") |> 
+  column_spec(2, color = ifelse(is.na(df$year), "red", "black"))
+```
+
+
+:::
+
+:::
+
+## Inner Join {.smaller}
+
+::: {}
+- Inner join includes all rows in both [left] and [right]; no new NAs
+:::
+
+::: {.columns .pv4}
+
+::: {.column .tc width="25%"}
+
+[movies]{.b .blue}
+
+```{r}
+#| echo: false
+
+movies <- tribble(
+  ~movie, ~year,
+  1, 2020,
+  2, 2003,
+  3, 2019,
+  4, 2006,
+  5, 2003,
+  6, 2002
+)
+kable(movies)
+```
+
+:::
+
+::: {.column .tc width="25%"}
+
+[avg_ratings]{.b .blue}
+
+```{r}
+#| echo: false
+
+avg_ratings <- tribble(
+  ~movie, ~average,
+  2, 2.2,
+  3, 8.0,
+  4, 6.7,
+  5, 8.7,
+  6, 3.5,
+  7, 7.5
+)
+kable(avg_ratings)
+```
+
+:::
+
+::: {.column .tc width="50%"}
+
+[Inner Join (movies, avg_ratings)]{.b .green}
+
+```{r}
+#| echo: false
+
+df <- inner_join(movies, avg_ratings, by = "movie")
+kable(df, "html")
+```
+
+
+:::
+
+:::
+
+
+## Full Join {.smaller}
+
+::: {}
+- Full join includes all rows in either [left] opr [right]; missings as NAs
+:::
+
+::: {.columns .pv4}
+
+::: {.column .tc width="25%"}
+
+[movies]{.b .blue}
+
+```{r}
+#| echo: false
+
+movies <- tribble(
+  ~movie, ~year,
+  1, 2020,
+  2, 2003,
+  3, 2019,
+  4, 2006,
+  5, 2003,
+  6, 2002
+)
+kable(movies)
+```
+
+:::
+
+::: {.column .tc width="25%"}
+
+[avg_ratings]{.b .blue}
+
+```{r}
+#| echo: false
+
+avg_ratings <- tribble(
+  ~movie, ~average,
+  2, 2.2,
+  3, 8.0,
+  4, 6.7,
+  5, 8.7,
+  6, 3.5,
+  7, 7.5
+)
+kable(avg_ratings)
+```
+
+:::
+
+::: {.column .tc width="50%"}
+
+[Full Join (movies, avg_ratings)]{.b .green}
+
+```{r}
+#| echo: false
+
+df <- full_join(movies, avg_ratings, by = "movie")
+kable(df, "html") |> 
+  column_spec(2, color = ifelse(is.na(df$year), "red", "black")) |> 
+  column_spec(3, color = ifelse(is.na(df$average), "red", "black"))
+```
+
+
+:::
+
+:::
+
+# Tidyverse Joins
+
+## Tidyverse Joins {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li jmkpuued trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Tidyverse Joins Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# Load and examine 
+library(nycflights13)
+flights
+airlines
+airports
+planes
+
+# Select a subset of columns to make it easier to see (not necessary to work)
+flights2 <- 
+  flights |> 
+  select(year, month, day, hour, origin, dest, tailnum, carrier) |> 
+  print()
+
+# Add information to flights2 about each carrier from airlines
+flights2 |> 
+  left_join(airlines, by = "carrier")
+
+# If the key variables are named differently, we can give "by" a named vector
+# The order should be c(x = y) where x is the first table and y is the second
+flights2 |> 
+  left_join(airports, by = c("origin" = "faa"))
+
+# Add information to flights2 about each tailnum from planes
+flights2 |> 
+  left_join(planes, by = "tailnum")
+
+# Note the following about the output
+# (1) both tables had a year variable, so it added .x and .y to distinguish them
+# (2) if flights2 had a tailnum not in planes, all joined variables will be NA
+
+# We can change the suffix it adds to duplicate variables as a two-element vector
+flights2 |> 
+  left_join(planes, by = "tailnum", suffix = c("_flight", "_plane"))
+
+# Confirm that there is no record in planes for tailnum N3ALAA
+planes |> 
+  filter(tailnum == "N3ALAA")
+
+# To only return rows that have a match in both tables use inner_join()
+flights2 |> 
+  inner_join(planes, by = "tailnum")
+
+# Note that the observation for tailnum N3ALAA is gone and there are fewer rows
+
+# To return rows that have a match in either table use full_join()
+flights2 |> 
+  full_join(planes, by = "tailnum")
+
+# To return all rows in planes and all flights that match them, use right_join()
+flights2 |> 
+  right_join(planes, by = "tailnum")
+```

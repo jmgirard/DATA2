@@ -1,0 +1,27 @@
+---
+title: "Week 1: Overview"
+format:
+  html:
+    page-layout: full
+---
+
+## [01a] NO CLASS
+
+This lecture will not meet due to [Martin Luther King Jr. Day](https://en.wikipedia.org/wiki/Martin_Luther_King_Jr._Day).
+
+## [01b] Course Overview
+
+### Topics
+
+- Syllabus
+- Modules
+- Canvas
+
+### Slides
+
+<iframe class="slide-deck" src="./Presentations/01b_Slides.html" title="[01b] Presentation">
+</iframe>
+
+### Recording
+
+<iframe id="kmsembed-1_es2n4i0o" width="600" height="374" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_es2n4i0o/uiConfId/45147491/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="399/800 Lecture [01b]"></iframe>

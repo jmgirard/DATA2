@@ -1,0 +1,123 @@
+---
+title: "Unit II Project"
+format:
+  html:
+    page-layout: full
+---
+
+## Recording
+
+<iframe id="kmsembed-1_tos7cfvy" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_tos7cfvy/uiConfId/45147491/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="399/800 Lecture [15a]"></iframe>
+
+## Project Overview
+
+The purpose of the Unit II Project is to give you a chance to apply your new data science skills (i.e., programming, wrangling, visualization, and communication) to real-world data that holds some interest for you. You will work as a team of 4-5 students. This will give you an opportunity to develop and hone your collaborative, teamwork skills (e.g., planning, communication, accountability, and mutual support). Each team will work together to create a tidy dataset and Quarto document including text, code, and figures. You will also submit a debriefing document as an individual.
+
+The Unit II Project is very similar in form to the Unit I Project. However, your team will need to use skills learned during Unit II. At a minimum, your project should involve summarization, reshaping and/or joining data, advanced visualization elements, and special data types and/or automation. Note that the Unit II Project should be entirely unique (i.e., not a re-hash of the Unit I Project) and should be entirely created by the members of your team (i.e., not copied from the internet or written by AI tools).
+
+
+## Topic Areas
+
+-  **Social Sciences** - any topic related to human behaviors and societies\
+    *Examples: languages, wellbeing, spending, etc.*
+
+-  **Life Sciences** - any topic related to living organisms (large and small)\
+    *Examples: animals, plants, crops, habitats, etc.*
+
+-  **Physical Sciences** - any topic related to inanimate natural objects\
+    *Examples: climate, oceans, stars, elements, etc.*
+
+-  **Medical Sciences** - any topic related to health and medicine\
+    *Examples: diseases, treatments, prevention, etc.*
+
+-  **Sports** - any topic related to competitive physical activity or gaming\
+    *Examples: games, players, coaches, records, etc.*
+
+-  **Entertainment** - any topic related to pop culture and entertainment\
+    *Examples: books, characters, albums, films, etc.*
+
+-  **Food and Drink** - any topic related to nutrition and consumption\
+    *Examples: restaurants, menus, awards, wine, etc.*
+
+-  **Politics and History** - any topic related to governance and past events\
+    *Examples: voting, approval, development, events, etc.*
+
+## Project Components
+
+  1. The **Planning** Document (due at the end of week 1, submitted as a team)
+  
+  1. The **Report** Document (due at the end of week 2, submitted as a team)
+  
+  1. The **Debriefing** Document (due at the end of week 2, submitted as an individual)
+
+## Planning Document
+
+Your team will need to submit a planning document at the end of the first week. This plan can be any kind of text document (e.g., docx or markdown) and should include the names of all team members, a description of what the team accomplished during the first week, what the team plans to accomplish during the second week, how the team plans to handle communication and collaboration, and a timeline with assigned tasks and rough deadlines.
+
+## Report Document
+
+The main product of the project is a report document that your team will need to submit at the end of the second week. It should be a Quarto HTML document that describes the dataset your team designed, several polished figures showing off the dataset, and some text describing insights your team gathered from the dataset and visualizations.
+
+### Data Design
+
+First, as a team, create a new dataset relevant to your topic area from online sources. It should have at least 100 observations (20-25 per team member) and 4-5 variables (including both numbers and strings as well as discrete and continuous values). You are also welcome to add more observations than 100 if you want to, but doing so isn't necessary.
+
+1.  **Decide on data source(s).** Where will your data come from? Good sources include [Wikipedia](https://wikipedia.org) articles, specialty websites about your topic area, or your own data collection efforts.
+
+2.  **Import the dataset.** Read the data into R as one or more tibbles. Make sure everything read in properly and that all missing values are set to `NA`.
+
+3. **Wrangle the data.** Use skills from Unit II to reshape and/or join the data and deal with special data types and/or automation tasks.
+
+4. **Summarize the data.** In addition to your visualizations, create between one and three summary tibbles using `summarize()` that reveals interesting information about your data (e.g., counts, ranges, means).
+
+### Visualization
+
+Second, as a team, create [one figure per team member]{.ul} to visualize variables and/or relationships in your dataset. These figures should be interesting and well-polished. The goal is to learn something about your topic and tell a simple story about your data through these figures.
+
+1.  **Decide on your figures.** What variables and/or relationships are the most interesting? Which are most likely to yield conclusions and insights?
+
+2.  **Create your figures.** Implement your designs in R using `ggplot2`, creating separate figure objects. Use at least one advanced element (e.g., faceting, positions, stat summary, highlighting, layouts) in each figure.
+
+3.  **Polish your figures.** Adjust your scales and aesthetic settings to make them look good. Add some labels and customize the theme.
+
+### Communication
+
+Third, as a team, describe your project in a Quarto document with the following sections:
+
+1.  **Overview** - In text, give a brief introduction to your project. Describe what your project is about (i.e., what was your topic area and what specific subtopic did you pick) and why it was interesting to your team.
+
+2.  **Wrangling** - In text, describe the process of finding your data source(s), importing the data, wrangling, and summarizing it. Also define every variable in your dataset and, when applicable, including information about units or possible categories. Include R chunks for anything you did in R and print the tibble containing your dataset so that readers can see it.
+
+3.  **Visualization** - In text, describe the process of deciding on your figures, aesthetic mappings, and geometric objects. Include R chunks for creating the figures and print the figures so that readers can see them.
+
+4.  **Conclusions** - In text, describe a few conclusions or insights into your topic area that your project and visualizations helped you to discover and think more deeply about.
+
+## Debriefing Document
+
+Finally, as an individual, write a brief (3-6 sentence) answer to each of the following questions. You can use any format for this report (e.g., Word).
+
+1.  **What did you contribute to the project?**\
+    *Examples: What tasks did you help complete and how? What ideas did you help brainstorm and evaluate? What decisions did you help make?*
+
+2.  **What did you learn about doing data science with real-world data?**\
+    *Examples: How does real-world data differ from examples from class? What is it like to have to collect your own data? What challenges came up?*
+
+3.  **What did you learn about working in a data science team?**\
+    *Examples: What parts were easier or harder than you anticipated? What worked and what didn't as a team? How can you improve as a teammate?*
+
+4.  **How much did each teammate contribute and use teamwork skills?**\
+    *Please describe each teammate separately and describe their contributions and teamwork skills (good or bad). Your answers will be kept confidential.*
+
+## Evaluation
+
+I will evaluate the projects with the following grading rubric (20 pts total).
+
+-   **Team: Plan** (2 pts total)
+
+-   **Team: Data Design** (4 pts total)
+
+-   **Team: Visualization** (5 pts total)
+
+-   **Team: Communication** (5 pts total)
+
+-   **Individual: Report** (4 pts total)

@@ -1,0 +1,73 @@
+---
+title: "Week 6: Communicate"
+format:
+  html:
+    page-layout: full
+---
+
+## [06a] Program to Communicate
+
+### Topics
+
+- Code Style
+- Code Chunks
+- More Quarto
+
+### Slides
+
+<iframe class="slide-deck" src="./Presentations/06a_Slides.html" title="[06a] Presentation">
+</iframe>
+
+[Click here to view the slides in their own window.](./Presentations/06a_Slides.html)
+
+### Recording
+
+<iframe id="kmsembed-1_5o0vltg7" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_5o0vltg7/uiConfId/45147491/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="399/800 Lecture [06a]"></iframe>
+
+### Activity
+
+- [Activity \[06a\]](./Activities/06a_Activity.html)
+
+### Optional Readings
+
+- <https://style.tidyverse.org/>
+- <https://quarto.org/docs/guide/>
+
+
+## [06b] Visualize to Communicate
+
+### Topics
+
+- Scales
+- Labels
+- Themes
+
+### Slides
+
+<iframe class="slide-deck" src="./Presentations/06b_Slides.html" title="[06b] Presentation">
+</iframe>
+
+### Recording
+
+<iframe id="kmsembed-1_3irjelwl" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_3irjelwl/uiConfId/45147491/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="399/800 Lecture [06b]"></iframe>
+
+### Activity
+
+- [Activity \[06b\]](./Activities/06b_Activity.html)
+
+### Optional Readings
+
+- <https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf>
+- <https://r4ds.had.co.nz/graphics-for-communication.html>
+- <https://ggplot2-book.org/polishing.html>
+
+
+## Week 6 Assignment
+
+### Instructions
+
+- [Week 6 Assignment](./Assignments/06_Assignment.html)
+
+### Data Files
+
+- <a href="../data/chocolate.csv" download="chocolate.csv">chocolate.csv</a>

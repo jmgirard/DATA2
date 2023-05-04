@@ -1,0 +1,87 @@
+---
+title: "Lecture [04b] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1
+
+Load in the `economics` tibble (included in \{tidyverse\}). Then create a pipeline to accomplish the following steps, saving the output to a new tibble called `unemp` and printing it:
+
+a) Calculate a new variable called `rate` by dividing `unemploy` (the number of unemployed, in thousands) by `pop` (the total population, in thousands).
+
+b) Then drop (i.e., unselect) the `pce`, `uempmed`, and `psavert` variables from the tibble.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+Final Pipeline:
+
+```{r}
+#| message: false
+
+library(tidyverse)
+unemp <- 
+  economics |> 
+  mutate(rate = unemploy / pop) |> 
+  select(-pce, -uempmed, -psavert) |> 
+  print()
+```
+
+</blockquote></details></p>
+
+
+## Question 2
+
+Download the "kaggle_cereal.csv" data file from Canvas. Copy it to your Project folder and read it into R as a tibble. Then create a pipeline to produce a short list of cereals for me to try. I am only interested in cold cereals with a rating greater than 70. Please arrange the list so that the cereals with the fewest calories are displayed at the top. Save the result as a tibble called `jeffs_list` (I expect it to be even more popular than Craig's list 🙃) and print it.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| message: false
+
+jeffs_list <- 
+  read_csv("../../data/kaggle_cereal.csv")  |> 
+  filter(type == "cold" & rating > 70) |> 
+  arrange(calories) |> 
+  print()
+```
+
+</blockquote></details></p>
+
+
+## Question 3
+
+Two other useful column verbs are `rename()` and `relocate()`. You can use `rename(tbl, new_name = old_name)` to rename a variable in a tibble. You can use `relocate(tbl, var_to_move, .before = other_var)` to move a variable before another variable or `relocate(tbl, var_to_move, .after = other_var)` to move a variable after another variable. These verbs won't be on the assignment, but are useful to play around with.
+
+a) Try to rename the `uempmed` variable in the `economics` tibble to `duration`.
+
+b) Try to move the `unemploy` variable in the `economics` tibble to come after the `date` variable.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Part (a)**
+
+```{r}
+#| message: false
+
+library(tidyverse)
+rename(economics, duration = uempmed)
+```
+
+**Part (b)**
+
+```{r}
+relocate(economics, unemploy, .after = date)
+```
+
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

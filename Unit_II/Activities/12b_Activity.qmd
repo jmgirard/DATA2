@@ -1,0 +1,115 @@
+---
+title: "Lecture [12b] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1
+
+I am interested in buying a used SUV from 2008. Filter the `mpg` dataset to only include cars from that year and then create a jittered scatterplot with `hwy` on x and `cty` on y. Highlight in red the cars that are from the "suv" class.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| message: false
+
+library(tidyverse)
+library(gghighlight)
+
+mpg |> 
+  filter(year == 2008) |> 
+  ggplot(aes(x = hwy, y = cty)) +
+  geom_jitter(color = "red") +
+  gghighlight(class == "suv")
+```
+
+
+</blockquote></details></p>
+
+## Question 2
+
+Recreate this figure from `mpg` using \{ggplot2\} and \{patchwork\}. *Hint:* The geoms (left-to-right) are density, bar, density, boxplot, boxplot.
+
+*Bonus:* Make the top row half the height of the bottom row and add tags "a" to "e".
+
+```{r}
+#| message: false
+#| echo: false
+
+library(patchwork)
+p1 <- ggplot(mpg, aes(x = hwy)) + geom_density()
+p2 <- ggplot(mpg, aes(x = drv)) + geom_bar()
+p3 <- ggplot(mpg, aes(x = cty)) + geom_density()
+p4 <- ggplot(mpg, aes(x = drv, y = hwy)) + geom_boxplot()
+p5 <- ggplot(mpg, aes(x = drv, y = cty)) + geom_boxplot()
+((p1 + p2 + p3) / (p4 + p5))
+```
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| message: false
+
+library(patchwork)
+p1 <- ggplot(mpg, aes(x = hwy)) + geom_density()
+p2 <- ggplot(mpg, aes(x = drv)) + geom_bar()
+p3 <- ggplot(mpg, aes(x = cty)) + geom_density()
+p4 <- ggplot(mpg, aes(x = drv, y = hwy)) + geom_boxplot()
+p5 <- ggplot(mpg, aes(x = drv, y = cty)) + geom_boxplot()
+((p1 + p2 + p3) / (p4 + p5))
+```
+
+**Bonus**
+
+```{r}
+((p1 + p2 + p3) / (p4 + p5)) + 
+  plot_layout(heights = c(1, 2)) +
+  plot_annotation(tag_levels = "a")
+```
+
+</blockquote></details></p>
+
+## Question 3
+
+Create a document in PowerPoint (or equivalent program, e.g., Google Slides) and draw a box where you would put a figure. Examine that box's size and save a ggplot in that same size. Insert your image into PowerPoint.
+
+*Bonus:* Adjust the font size of your plot to be more readable in PowerPoint.
+
+```{r}
+#| eval: false
+
+# Simple example plot
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()
+```
+
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| eval: false
+
+p <- ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()
+ggsave("act3a.png", plot = p, width = 5, height = 3, units = "in")
+```
+
+**Bonus**
+
+```{r}
+#| eval: false
+
+p <- ggplot(mpg, aes(x = displ, y = hwy)) + geom_point() +
+  theme_grey(base_size = 18)
+ggsave("act3b.png", plot = p, width = 5, height = 3, units = "in")
+```
+
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

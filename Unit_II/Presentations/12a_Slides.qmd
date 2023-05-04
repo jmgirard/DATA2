@@ -1,0 +1,399 @@
+---
+format: 
+  revealjs:
+    css: ../../styles.css
+    slide-number: true
+    show-slide-number: all
+    progress: true
+    history: true
+    hash-type: number
+    theme: default
+    code-block-background: true
+    highlight-style: zenburn
+    code-link: false
+    code-copy: true
+    pagetitle: "Foundations of Data Science"
+    author-meta: "Jeffrey Girard"
+    date-meta: "2023-04-03"
+    semester: "Spring 2023"
+    course: "399/800"
+    lecture: "12a"
+---
+
+::: {.my-title}
+# [Foundations of]{.my-subtitle}<br />[Data Science]{.blue}
+
+::: {.my-grey}
+[{{< meta semester >}} | Course {{< meta course >}}]{}<br />
+[Jeffrey M. Girard | Lecture {{< meta lecture >}}]{}
+:::
+
+![](../../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
+:::
+
+## Roadmap
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+1. Faceting
+  
+2. Positions
+
+3. Stat Summary
+
+4. Activity
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li xtkehzkm trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+# Faceting
+
+## Faceting {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   [Faceting]{.b .blue} creates multiple subplots
+    -   Each shows a subset of the data
+
+::: {.fragment .mt1}
+-   There are two types of faceting
+    -   **Grid** creates a 2D matrix (`row~col`)
+    -   **Wrap** creates a 1D list (`~var`)
+
+![](../../img/facet.png){width="70%"}
+    
+:::
+
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li gpjaxlut trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Faceting Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# Filter out a subset of mpg to use in this section (optional)
+mpg2 <- mpg |> 
+  filter(
+    cyl != 5,
+    drv %in% c("4", "f"), 
+    class != "2seater"
+  )
+
+# Create a baseline plot without faceting
+p <- ggplot(mpg2, aes(x = displ, y = hwy)) + geom_point()
+p
+
+# Add facet wrapping by ~class
+p + facet_wrap(~class)
+
+# Control the shape of the output
+p + facet_wrap(~class, ncol = 2)
+p + facet_wrap(~class, nrow = 2)
+
+# Control the direction of the wrapping (i.e., ordering)
+p + facet_wrap(~class, ncol = 2, dir = "v") #vertical / top-to-bottom
+p + facet_wrap(~class, ncol = 2, dir = "h") #horizontal / left-to-right
+
+# Add facet grid by . ~ cyl where each column is a cyl value
+p + facet_grid(. ~ cyl)
+p + facet_grid(. ~ cyl, labeller = label_both)
+
+# Add facet grid by drv ~ . where each row is a drv value
+p + facet_grid(drv ~ ., labeller = label_both)
+
+# Add facet grid by drv ~ cyl where each cell is a drv-cyl combination
+p + facet_grid(drv ~ cyl, labeller = label_both)
+
+# We can free up the scales to "zoom" for each facet
+p + facet_grid(drv ~ cyl, labeller = label_both, scales = "free")
+p + facet_grid(drv ~ cyl, labeller = label_both, scales = "free_x")
+p + facet_grid(drv ~ cyl, labeller = label_both, scales = "free_y")
+
+# Another example
+ggplot(mpg2, aes(x = cty, y = hwy)) + 
+  geom_point() + 
+  geom_abline(slope = 1, intercept = 0)
+
+ggplot(mpg2, aes(x = cty, y = hwy)) + 
+  geom_point() + 
+  geom_abline(slope = 1, intercept = 0) + 
+  facet_wrap(~cyl)
+
+ggplot(mpg2, aes(x = cty, y = hwy)) + 
+  geom_point() + 
+  geom_abline(slope = 1, intercept = 0) + 
+  facet_wrap(~cyl, scales = "free")
+```
+
+
+# Positions
+
+## Positions {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   Geoms can have their positions changed
+    -   This is very useful for bar/col geoms
+    -   We can show absolute and relative counts
+    -   We can compare counts side-by-side
+
+::: {.fragment .mt1}
+-   This can also be useful for text/label geoms
+    -   e.g., we can include the count numbers
+:::
+
+::: {.fragment .mt1}
+-   We'll return to the plotting of discrete data
+    -   Instead of jittering points, we can plot counts
+:::
+
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li dlqsimus trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Positions Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+library(palmerpenguins)
+penguins
+
+ggplot(penguins, aes(x = species)) + 
+  geom_bar(color = "black")
+
+ggplot(penguins, aes(x = species, y = island)) +
+  geom_jitter(width = 0.25, height = 0.25)
+
+# By default, it stacks the bars on top of each other
+ggplot(penguins, aes(x = species, fill = island)) + 
+  geom_bar(color = "black")
+
+# Make each set of bars the same height (turn y into percentage)
+ggplot(penguins, aes(x = species, fill = island)) +  
+  geom_bar(color = "black", position = "fill") +
+  labs(y = "proportion")
+
+# Position the bars side-by-side
+ggplot(penguins, aes(x = species, fill = island)) +
+  geom_bar(color = "black", position = "dodge")
+
+ggplot(penguins, aes(x = species, fill = island)) +
+  geom_bar(color = "black", position = position_dodge(preserve = "single"))
+
+# Plotting from summaries
+penguins |> 
+  count(species, island)
+
+# Include zero counts
+penguins |> 
+  count(species, island, .drop = FALSE)
+
+# Plot the summary with zero counts
+penguins |> 
+  count(species, island, .drop = FALSE) |> 
+  ggplot(aes(x = species, y = n, fill = island)) +
+  geom_col(color = "black", position = "dodge")
+
+# Add counts as text geom (dodging didn't work...)
+penguins |> 
+  count(species, island, .drop = FALSE) |> 
+  ggplot(aes(x = species, y = n, fill = island, label = n)) +
+  geom_col(color = "black", position = "dodge") +
+  geom_text(position = "dodge")
+
+# Fix dodge by specifying same width
+penguins |> 
+  count(species, island, .drop = FALSE) |> 
+  ggplot(aes(x = species, y = n, fill = island, label = n)) +
+  geom_col(color = "black", position = position_dodge(width = 0.9)) +
+  geom_text(position = position_dodge(width = 0.9))
+
+# Adjust the text vertically to appear above each bar
+penguins |> 
+  count(species, island, .drop = FALSE) |> 
+  ggplot(aes(x = species, y = n, fill = island, label = n)) +
+  geom_col(color = "black", position = position_dodge(width = 0.9)) +
+  geom_text(position = position_dodge(width = 0.9), vjust = -0.5)
+```
+
+
+# Stat Summary
+
+## Stat Summary {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   To plot summaries, we can use two steps
+    -   Step 1: use `summarize()`
+    -   Step 2: plot the results
+    
+::: {.fragment .mt1}
+-   Or we can use a one-step shortcut in \{ggplot2\}
+    -   Step 1: use `stat_summary()`
+    -   The `fun` arg calculates y or x
+    -   The `fun.min` arg calculates ymin or xmin
+    -   The `fun.max` arg calculates ymax or xmax
+    -   The `fun.data` arg calculates all three
+
+:::
+
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li ogfgksuz trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Stat Summary Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# Calculate mean price by cut using summarize
+diamonds |> 
+  summarize(
+    mdepth = mean(depth),
+    .by = cut
+  )
+
+# Then plot this summary tibble
+diamonds |> 
+  summarize(
+    mdepth = mean(depth),
+    .by = cut
+  ) |> 
+  ggplot(aes(x = cut, y = mdepth)) +
+  geom_point()
+
+# Or calculate and plot it using stat_summary
+ggplot(diamonds, aes(x = cut, y = depth)) +
+  stat_summary(
+    fun = mean,
+    geom = "point"
+  )
+
+# Calculate error bar positions using summarize
+diamonds |> 
+  summarize(
+    mdepth = mean(depth),
+    ldepth = mean(depth) - sd(depth),
+    udepth = mean(depth) + sd(depth),
+    .by = cut
+  )
+
+diamonds |> 
+  summarize(
+    mdepth = mean(depth),
+    ldepth = mean(depth) - sd(depth),
+    udepth = mean(depth) + sd(depth),
+    .by = cut
+  ) |> 
+  ggplot(aes(x = cut, y = mdepth, ymin = ldepth, ymax = udepth)) +
+  geom_point() +
+  geom_errorbar()
+
+# Pointrange is like a combination of the point and errorbar geoms
+diamonds |> 
+  summarize(
+    mdepth = mean(depth),
+    ldepth = mean(depth) - sd(depth),
+    udepth = mean(depth) + sd(depth),
+    .by = cut
+  ) |> 
+  ggplot(aes(x = cut, y = mdepth, ymin = ldepth, ymax = udepth)) +
+  geom_pointrange(linewidth = 1)
+
+diamonds |> 
+  ggplot(aes(x = cut, y = depth)) +
+  stat_summary(
+    fun = mean,
+    fun.min = \(x) mean(x) - sd(x),
+    fun.max = \(x) mean(x) + sd(x),
+    geom = "pointrange",
+    linewidth = 1
+  )
+
+# Shortcut to calculate mean +/- 1 SD
+library(Hmisc)
+diamonds |> 
+  ggplot(aes(x = cut, y = depth)) +
+  stat_summary(
+    fun.data = \(x) mean_sdl(x, mult = 1),
+    geom = "pointrange",
+    linewidth = 1
+  )
+
+# Adjust multiplier to get mean +/- 2 SD
+diamonds |> 
+  ggplot(aes(x = cut, y = depth)) +
+  stat_summary(
+    fun.data = \(x) mean_sdl(x, mult = 2),
+    geom = "pointrange",
+    linewidth = 1
+  )
+
+# Similar function to calculate 95% CI
+diamonds |> 
+  ggplot(aes(x = cut, y = depth)) +
+  stat_summary(
+    fun.data = \(x) mean_cl_normal(x, conf.int = 0.95),
+    geom = "pointrange",
+    linewidth = 1
+  )
+
+# Combine with positions to do cool stuff
+penguins |> 
+  filter(sex %in% c("female", "male")) |> 
+  ggplot(aes(y = species, x = body_mass_g, color = sex)) +
+  stat_summary(
+    fun.data = mean_cl_normal,
+    geom = "pointrange",
+    position = position_dodge(width = 0.25),
+    linewidth = 1
+  )
+
+# Create classic candlestick plot with two summaries/geoms
+penguins |> 
+  filter(sex %in% c("female", "male")) |> 
+  ggplot(aes(x = species, y = body_mass_g, fill = sex)) +
+  stat_summary(
+    fun = mean,
+    geom = "col",
+    position = position_dodge(width = 0.9)
+  ) + 
+  stat_summary(
+    fun.data = mean_cl_normal,
+    geom = "errorbar",
+    position = position_dodge(width = 0.9),
+    width = 0.5
+  )
+```

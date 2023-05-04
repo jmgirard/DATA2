@@ -1,0 +1,114 @@
+---
+title: "Lecture [12a] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1
+
+Create a ggplot from `mpg` that maps `displ` to x and `hwy` to y and includes a point geom. Facet the plot such that there are seven columns showing `class` levels and three rows showing `drv` levels.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| message: false
+
+library(tidyverse)
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  facet_grid(drv~class)
+```
+
+
+</blockquote></details></p>
+
+## Question 2
+
+Create a stacked bar chart from `mpg` that shows the proportion of each `class` of car that uses each type of drive train (`drv`). Use this plot to answer: which class of car uses only front-wheel drive (i.e., `"f"`) and which class of car is the most balanced in terms of using different types of drive trains? *Hint:* All bars should be the same height.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+mpg |> 
+  ggplot(aes(x = class, fill = drv)) + 
+  geom_bar(position = "fill")
+```
+
+All **minivans** in this dataset use the front-wheel drive type of drive train, and the **subcompact** class is the most balanced.
+</blockquote></details></p>
+
+## Question 3
+
+Create a ggplot from `mpg` that maps `hwy` to x and `manufacturer` to y; use `stat_summary()` to plot a pointrange geom for each manufacturer that puts the point at the median value and extends the range to the minimum and maximum values. Use this plot to answer: which two manufacturers exceeded 25 mpg highway fuel efficiency for all their cars in this dataset?
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+mpg |> 
+  ggplot(aes(x = hwy, y = manufacturer)) +
+  stat_summary(
+    fun = median,
+    fun.min = min,
+    fun.max = max,
+    geom = "pointrange"
+  )
+
+# Hidden shortcut function :)
+mpg |> 
+  ggplot(aes(x = hwy, y = manufacturer)) +
+  stat_summary(
+    fun.data = median_hilow,
+    geom = "pointrange"
+  )
+```
+**Pontiac** and **Honda** both had minimum `hwy` values (i.e., lower ranges) above 25.
+
+</blockquote></details></p>
+
+## Challenge
+
+Recreate the figure below from the `economics` tibble (included in \{tidyverse\}). *Hint:* This will require some reshaping as well as faceting.
+
+```{r}
+#| echo: false
+
+economics |> 
+  pivot_longer(
+    pce:unemploy, 
+    names_to = "variable", 
+    values_to = "value"
+  ) |> 
+  ggplot(aes(x = date, y = value)) + 
+  geom_line() +
+  facet_grid(variable~., scales = "free_y")
+```
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| eval: false
+
+economics |> 
+  pivot_longer(
+    pce:unemploy, 
+    names_to = "variable", 
+    values_to = "value"
+  ) |> 
+  ggplot(aes(x = date, y = value)) + 
+  geom_line() +
+  facet_grid(variable~., scales = "free_y")
+```
+
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

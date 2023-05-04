@@ -1,0 +1,141 @@
+---
+title: "Lecture [10a] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1 (Summarize)
+
+Summarize the `txhousing` tibble (included in \{tidyverse\}) to recreate the following tibble (where `n_obs` is the number of observations, `n_cities` is the number of unique/distinct cities, `mdn_listings` is the median number of monthly listings, `max_listings` is the maximum number of monthly listings). Ignore/remove any missing values when calculating the last two summary variables.
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+library(tidyverse)
+txhousing |> 
+  summarize(
+    n_obs = n(),
+    n_cities = n_distinct(city),
+    mdn_listings = median(listings, na.rm = TRUE),
+    max_listings = max(listings, na.rm = TRUE)
+  )
+```
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse)
+txhousing |> 
+  summarize(
+    n_obs = n(),
+    n_cities = n_distinct(city),
+    mdn_listings = median(listings, na.rm = TRUE),
+    max_listings = max(listings, na.rm = TRUE)
+  )
+```
+
+</blockquote></details></p>
+
+## Question 2 (Grouped Summarize)
+
+Summarize the `txhousing` tibble to recreate the following tibble (where `m_price` is the mean of the `median` variable and `s_price` is the standard deviation of the `median` variable, both per city-year combination).
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+txhousing |> 
+  summarize(
+    m_price = mean(median),
+    s_price = sd(median),
+    .by = c(city, year)
+  )
+```
+
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| message: false
+#| warning: false
+
+txhousing |> 
+  summarize(
+    m_price = mean(median),
+    s_price = sd(median),
+    .by = c(city, year)
+  )
+```
+
+</blockquote></details></p>
+
+## Question 3 (Grouped Mutate)
+
+Use a grouped mutate to add a new variable to the `txhousing` tibble that shows the average number of sales for that city in that year. Select only the `city`, `year`, `month`, and `sales` variables, in addition to the newly created variable.
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+txhousing |> 
+  mutate(
+    avg_sales = mean(sales),
+    .by = c(city, year)
+  ) |> 
+  select(city, year, month, sales, avg_sales)
+```
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| message: false
+#| warning: false
+
+txhousing |> 
+  mutate(
+    avg_sales = mean(sales),
+    .by = c(city, year)
+  ) |> 
+  select(city, year, month, sales, avg_sales)
+```
+
+</blockquote></details></p>
+
+## Optional Challenge
+
+Read the documentation for the `first()`, `last()`, and `nth()` summary functions (they all share a single documentation page). Then apply these functions to do the following: (1) calculate the average number of monthly `listings` in each city (removing any missing values), and then (2) find the cities with the highest, second-highest, second-lowest, and lowest average number of monthly listings.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+```{r}
+txhousing |> 
+  summarize(
+    m_listings = mean(listings, na.rm = TRUE),
+    .by = city
+  ) |> 
+  summarize(
+    most = first(city, order_by = m_listings),
+    second_most = nth(city, n = 2, order_by = m_listings),
+    second_least = nth(city, n = -2, order_by = m_listings),
+    least = last(city, order_by = m_listings)
+  )
+```
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

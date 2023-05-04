@@ -1,0 +1,94 @@
+---
+title: "Lecture [11a] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1
+
+Examine the `table5` tibble (included in \{tidyverse\}) and tidy it up using `separate()` and `unite()`. End with variables for country, four-digit year (YYYY), number of tuberculosis cases, and population.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| message: false
+
+library(tidyverse)
+table5 |> 
+  unite(
+    col = "year",
+    century, 
+    year, 
+    sep = ""
+  ) |> 
+  separate_wider_delim(
+    col = rate, 
+    delim = "/",
+    names = c("cases", "population")
+  )
+```
+
+</blockquote></details></p>
+
+
+## Question 2
+
+Reshape the `billboard` tibble (included in \{tidyverse\}) to a long format such that each row represents a single track’s ranking for a single week (variables: `artist`, `track`, `date.entered`, `week`, `rank`). For a challenge, remove the prefix from your final week variable and convert it into a numeric variable.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+billboard |> 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    values_to = "rank",
+    names_prefix = "wk", # Challenge
+    names_transform = parse_number # Challenge
+  )
+```
+
+</blockquote></details></p>
+
+
+## Question 3
+
+Reshape the `table2` tibble (included in \{tidyverse\}) so that each row represents a single country in a single year (Hint: variables should be `country`, `year`, `cases`, and `population`).
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+table2 |> 
+  pivot_wider(names_from = type, values_from = count)
+```
+
+</blockquote></details></p>
+
+
+## Optional Challenge
+
+Reshape the `us_rent_income` tibble (included in \{tidyverse\}) so that each row represents a single US state (Hint: Variables should be something like: `GEOID`, `NAME`, `estimate_income`, `estimate_rent`, `moe_income`, and `moe_rent`)
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+us_rent_income |> 
+  pivot_wider(
+    names_from = variable, 
+    values_from = c(estimate, moe)
+  )
+```
+
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

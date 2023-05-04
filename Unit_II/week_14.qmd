@@ -1,0 +1,22 @@
+---
+title: "Week 14: Showcase"
+format:
+  html:
+    page-layout: full
+---
+
+## [14a] Showcase
+
+Dr. Girard will present on advanced Quarto, GitHub, command line interfaces, and Shiny web development. 
+
+
+## [14b] Showcase
+
+TA James Adaryukov will present on text as data.
+
+
+## Week 14 Assignment
+
+### Instructions
+
+- [Week 14 Assignment](./Assignments/14_Assignment.html)

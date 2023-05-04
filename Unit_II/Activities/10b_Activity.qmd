@@ -1,0 +1,150 @@
+---
+title: "Lecture [10b] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1 (Tidy Selection)
+
+a.    Use tidy selection to extract all variables that have names ending with "_color" from the `starwars` tibble.
+
+b.    Use tidy selection to extract the `name` variable and all variables from the `species` variable to the last variable in the `starwars` tibble.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+#| message: false
+
+library(tidyverse)
+starwars |> 
+  select(ends_with("_color"))
+```
+
+**Answer (b)**
+
+```{r}
+starwars |> 
+  select(name, species:last_col())
+```
+
+</blockquote></details></p>
+
+## Question 2 (Across)
+
+a.    Use `across()` to apply the `str_to_upper()` function to the `manufacturer` and `model` variables of the `mpg` tibble.
+
+b.    Use `across()` to summarize the median of every numeric variable in the `diamonds` tibble.
+
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+mpg |> 
+  mutate(
+    across(
+      .cols = c(manufacturer, model), 
+      .fns = str_to_upper
+    )
+  )
+```
+
+**Answer (b)**
+
+```{r}
+diamonds |> 
+  summarize(
+    across(
+      .cols = where(is.numeric), 
+      .fns = median
+    )
+  )
+```
+
+
+</blockquote></details></p>
+
+## Question 3 (Scale Scores)
+
+a.    Add a new column to the `diamonds` tibble called `volume` that contains the rectangular volume of each diamond (i.e., the product or multiplication of the `x`, `y`, and `z` variables)
+
+b.    Add a new column to the `diamonds` tibble called `mdim` that contains the average dimension size of each diamond (i.e., the mean of the `x`, `y`, and `z` variables)
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+diamonds |> 
+  mutate(volume = x * y * z)
+```
+
+**Answer (b)**
+
+```{r}
+diamonds |> 
+  mutate(mdim = rowMeans(pick(x, y, z)))
+```
+
+**Alternate Answer (b)**
+
+```{r}
+diamonds |> 
+  # Create row identifier
+  mutate(row_id = row_number()) |> 
+  # Mutate while grouping by it
+  mutate(
+    mdim = mean(c(x, y, z)),
+    .by = row_id
+  )
+```
+
+</blockquote></details></p>
+
+## Challenge Question
+
+a.    Look at the code below and figure out how it works.
+
+b.    Adapt this code to create four new variables called `carat_minimum`, `carat_maximum`, `price_minimum`, and `price_maximum`.
+
+```{r}
+diamonds |> 
+  summarize(
+    across(
+      .cols = c(carat, price),
+      .fns = list(m = mean, s = sd),
+      .names = "{.fn}_{.col}"
+    )
+  )
+```
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+diamonds |> 
+  summarize(
+    across(
+      .cols = c(carat, price),
+      .fns = list(minimum = min, maximum = max),
+      .names = "{.col}_{.fn}"
+    )
+  )
+```
+
+</blockquote></details></p>
+
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

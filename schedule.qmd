@@ -1,0 +1,46 @@
+---
+title: "Schedule"
+subtitle: "[PSYC/ECON/POLS 399] Spring 2023"
+---
+
+## Dates
+
+| Unit | Week | Lecture (a) | Lecture (b) | Due        |
+|------|------|-------------|-------------|------------|
+| I    | 1    | NO CLASS    | 2023-01-18  |            |
+| I    | 2    | 2023-01-23  | 2023-01-25  | Assignment |
+| I    | 3    | 2023-01-30  | 2023-02-01  | Assignment |
+| I    | 4    | 2023-02-06  | 2023-02-08  | Assignment |
+| I    | 5    | 2023-02-13  | 2023-02-15  | Assignment |
+| I    | 6    | 2023-02-20  | 2023-02-22  | Assignment |
+| I    | 7    | 2023-02-27  | 2023-03-01  | Plan       |
+| I    | 8    | 2023-03-06  | 2023-03-08  | Report     |
+|      | 9    | NO CLASS    | NO CLASS    |            |
+| II   | 10   | 2023-03-20  | 2023-03-22  | Assignment |
+| II   | 11   | 2023-03-27  | 2023-03-29  | Assignment |
+| II   | 12   | 2023-04-03  | 2023-04-05  | Assignment |
+| II   | 13   | 2023-04-10  | 2023-04-12  | Assignment |
+| II   | 14   | 2023-04-17  | 2023-04-19  | Assignment |
+| II   | 15   | 2023-04-24  | 2023-04-26  | Plan       |
+| II   | 16   | 2023-05-01  | 2023-05-03  | Report     |
+
+## Topics
+
+| Unit | Week | Lecture (a)            | Lecture (b)              |
+|------|------|------------------------|--------------------------|
+| I    | 1    | NO CLASS               | Course Overview          |
+| I    | 2    | Meeting R              | Getting Organized        |
+| I    | 3    | Basic Programming      | More Programming         |
+| I    | 4    | Tidy Data              | dplyr Basics             |
+| I    | 5    | ggplot2 Basics         | more ggplot2             |
+| I    | 6    | Program to Communicate | Visualize to Communicate |
+| I    | 7    | Unit I Project         | Unit I Project           |
+| I    | 8    | Unit I Project         | Unit I Project           |
+|      | 9    | NO CLASS               | NO CLASS                 |
+| II   | 10   | Summarization          | Convenience              |
+| II   | 11   | Reshaping Data         | Joining Data             |
+| II   | 12   | Advanced Elements      | Advanced Elements        |
+| II   | 13   | Special Data Types     | Automation               |
+| II   | 14   | Showcase               | Showcase                 |
+| II   | 15   | Unit II Project        | Unit II Project          |
+| II   | 16   | Unit II Project        | Unit II Project          |

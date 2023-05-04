@@ -1,0 +1,118 @@
+---
+title: "Week 05 Assignment"
+---
+
+![](../../img/programming_357EDD.svg){.hero}
+
+## Instructions
+
+*Create a new Quarto document (HTML format), clear out the boilerplate code/text, and use this document to store your answers to each of the six questions below. Be sure to enable `embed-resources` using the header below. If your answer involves writing text, then use markdown to write 2--4 sentences per question; if you answer involves running code, then use one or more code chunks. For questions that ask you to fix code, correct any errors (while achieving the stated goal) and include only the working code in your document.*
+
+```markdown
+---
+format: 
+  html:
+    embed-resources: true
+---
+```
+
+*Please clearly mark which part of your document is answering which question (e.g., using markdown headings) and remove any "scratch work" or failed attempts from your document before submitting it. Finally, note that many essay-style questions will require you to read between the lines and use your imagination (as opposed to just looking up the answer in the lecture).*
+
+```{r}
+#| message: false
+#| echo: false
+
+library(tidyverse)
+```
+
+
+## Question 1
+
+a) Help me fix my code! "I want to depict the covariation of engine size and highway fuel efficiency."
+
+```{r}
+#| eval: false
+
+ggplot(mpg, x = displ, y = hwy) + geom_point()
+```
+
+b) Help me fix my code! "I want to create a time-series plot showing the population of Togo over time." (Note that `population` comes from \{tidyverse\}).
+
+```{r}
+#| eval: false
+
+library(tidyverse)
+population |> 
+  filter(country == "Togo") |> 
+  ggplot(aes(x = year, y = population)) |> 
+  geom_line() |> 
+  geom_point()
+```
+
+
+## Question 2
+
+Use the following code to create the `ts` tibble and then create a new graphic that maps `t` to the x-axis, `cos_t` to the y-axis, and includes the following geoms: a line geom with a linewidth of 1, and a horizontal reference line geom with a color of "lightblue", a linewidth of 3, and a y-intercept of 0. Set it up so that the reference line appears on a lower layer than (i.e., below) the cosine line.
+
+```{r}
+ts <- tibble(
+  t = seq(-9, 9, by = 0.25),
+  cos_t = cos(t)
+)
+```
+
+<p><details><summary>Hint</summary><blockquote>
+
+Your figure should look something like this:
+
+```{r}
+#| echo: false
+ggplot(ts, aes(x = t, y = cos_t)) + 
+  geom_hline(
+    yintercept = 0, 
+    color = "lightblue", 
+    size = 3
+  ) +
+  geom_line(size = 1)
+```
+
+</blockquote></details></p>
+
+## Question 3
+
+Plot the distribution of the `price` variable in the `diamonds` tibble using a histogram, a density plot, **and** a boxplot (i.e., create three different graphics). Then, based on what you see, briefly describe the distribution in words (e.g., is it continuous or discrete, what are its minimum and maximum values, where are most of its values concentrated, what kind of shape does it have).
+
+
+## Question 4
+
+Create figures using the `diamonds` tibble to answer the following two questions. Provide your code, figures, and a brief textual answer to each question (based on the figures).
+
+a) Is the weight (i.e., `carat`) of a diamond related to its value (i.e., `price`)? 
+
+b) Similarly, is the `color` of a diamond related to its value? If so, which colors are worth more?
+
+
+## Question 5
+
+a) Look at the figure below and describe it in text (i.e., by stating the aesthetic mappings and geoms that define it).
+
+b) Now recreate that figure from the `diamonds` tibble. It doesn't have to have to be identical (e.g., in terms of linewidth) but it should have all the major elements there.
+
+```{r}
+#| echo: false
+
+ggplot(diamonds, aes(y = cut, fill = cut)) +
+  geom_bar(color = "black", linewidth = 3/4)
+```
+
+
+## Question 6
+
+a) What are some of the pros and cons of histograms, density plots, and boxplots? When might you want to use one versus another?
+
+b) What is "layering" in the grammar of graphics and why is this such an important feature of \{ggplot2\}? Give a few examples of when layering might be useful in data visualization.
+
+
+---
+
+✅ Done! *Please save and then render your document to an HTML file. Check it over to make sure it is complete (and rendered properly) and then upload this file to Canvas by the deadline listed on the syllabus. Note that, if any of your code chunks has an error in it, the HTML file will not render properly (this is why removing scratch work is important).*

@@ -1,0 +1,115 @@
+---
+title: "Lecture [06a] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1 (Code Style)
+
+Apply the tidyverse style guide principles to clean up the following code:
+
+```{r}
+#| eval: false
+
+library(tidyverse)
+df <- mpg |> filter(year==2008) |> select(manufacturer , model, class, displ, hwy ) |> 
+  mutate (manufacturer=str_to_title(manufacturer), model = str_to_title ( model ),class = str_to_title(class))
+ggplot(data = df, mapping = aes(x = hwy, y = class, fill = class)) + 
+geom_vline(xintercept=25, color = "grey40", linewidth = 1) +
+geom_violin(color = "black",linewidth = 2 / 3,draw_quantiles = c(0.25,0.50, 0.75),scale = "count"
+  )
+```
+
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+*If you didn't enjoy this question, imagine what grading in this course is like and let that motivate you to style your code nicely when submitting assignments in the future!*
+
+```{r}
+#| echo: true
+#| message: false
+#| fig-width: 5
+#| fig-height: 5
+
+library(tidyverse)
+mpg2008 <- 
+  mpg |> 
+  filter(year == 2008) |> 
+  select(manufacturer, model, class, displ, hwy) |> 
+  mutate(
+    manufacturer = str_to_title(manufacturer),
+    model = str_to_title(model),
+    class = str_to_title(class)
+  )
+ggplot(mpg2008, aes(x = hwy, y = class, fill = class)) + 
+  geom_vline(xintercept = 25, color = "grey40", linewidth = 1) +
+  geom_violin(
+    color = "black",
+    linewidth = 2 / 3,
+    draw_quantiles = c(0.25, 0.50, 0.75),
+    scale = "count"
+  )
+```
+
+</blockquote></details></p>
+
+## Question 2 (Chunk Options)
+
+a) Adjust your code for Q1 to hide the welcome message from the \{tidyverse\} package.
+
+b) Adjust your code for Q1 to make the plot 5 inches tall and 5 inches wide.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Part (a)**
+
+Add `#| message: false` to the top of the chunk
+
+**Part (b)**
+
+Add `#| fig-height: 5` and `#| fig-width: 5` to the top of the chunk
+
+</blockquote></details></p>
+
+## Question 3 (More Quarto)
+
+a) Embed the following online video in your document:<br />
+<https://www.youtube.com/embed/hW7DW9NIO9M>
+
+b) Use MathJax to add an equation (in display mode) to show Einstein's famous [mass-energy equivalence equation](https://en.wikipedia.org/wiki/Mass%E2%80%93energy_equivalence): $E=mc^2$
+
+c) Change your document to use the `solar` HTML theme.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Part (a)**
+
+`{{{< video https://www.youtube.com/embed/hW7DW9NIO9M >}}}`
+
+{{< video https://www.youtube.com/embed/hW7DW9NIO9M >}}
+
+**Part (b)**
+
+`$$E = m c^{2}$$`
+
+$$E = m c^{2}$$
+
+**Part (c)**
+
+```yaml
+format:
+  html:
+    theme: solar
+```
+
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

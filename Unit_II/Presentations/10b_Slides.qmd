@@ -1,0 +1,393 @@
+---
+format: 
+  revealjs:
+    css: ../../styles.css
+    slide-number: true
+    show-slide-number: all
+    progress: true
+    history: true
+    hash-type: number
+    theme: default
+    code-block-background: true
+    highlight-style: zenburn
+    code-link: false
+    code-copy: true
+    pagetitle: "Foundations of Data Science"
+    author-meta: "Jeffrey Girard"
+    date-meta: "2023-03-22"
+    semester: "Spring 2023"
+    course: "399/800"
+    lecture: "10b"
+---
+
+::: {.my-title}
+# [Foundations of]{.my-subtitle}<br />[Data Science]{.blue}
+
+::: {.my-grey}
+[{{< meta semester >}} | Course {{< meta course >}}]{}<br />
+[Jeffrey M. Girard | Lecture {{< meta lecture >}}]{}
+:::
+
+![](../../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
+:::
+
+## Roadmap: Convenience
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+1. Tidy Selection
+  
+2. Across
+
+3. Scale Scores
+
+4. Activity
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li xtkehzkm trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+# Tidy Selection
+
+## Tidy Selection {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   `filter()` lets us retain rows using criteria
+    -   A version for columns would be convenient!
+
+::: {.fragment .mt1}
+-   This is essentially what tidy selection does
+    -   We can `select()` columns using criteria
+    -   It's like an extension of the `:` sugar
+:::
+
+::: {.fragment .mt1}
+-   We will use selection helpers and predicates
+    -   `starts_with()`, `contains()`, etc.
+    -   `everything()`, `last_col()`
+    -   `where()` and `is.*()`
+
+:::
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li tvyxmjyo trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Tidy Selection Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+library(palmerpenguins)
+
+penguins
+
+# Starts with
+
+penguins |> 
+  select(starts_with("bill_"))
+
+# PITFALL
+
+penguins |> 
+  starts_with("bill_") # error - don't forget select()
+  
+
+# Ends with
+
+penguins |> 
+  select(ends_with("_mm"))
+
+# Contains
+
+penguins |> 
+  select(contains("_length_"))
+
+# Where
+
+penguins |> 
+  select(where(is.factor))
+
+penguins |> 
+  select(where(is.numeric))
+
+penguins |> 
+  select(where(is.character))
+
+# PITFALL
+
+penguins |> 
+  select(where(is.factor())) # error - don't include () after is.*
+
+# Everything
+
+penguins |> 
+  select(everything())
+
+# Last Column
+
+penguins |> 
+  select(last_col())
+
+penguins |> 
+  select(body_mass_g:last_col())
+
+# Negating Criteria
+
+penguins |> 
+  select(!ends_with("_mm"))
+
+# Combining Criteria
+
+penguins |> 
+  select(where(is.factor) | starts_with("body_"))
+
+penguins |> 
+  select(species, where(is.numeric))
+
+penguins |> 
+  select(ends_with("_mm") & !contains("_depth_"))
+```
+
+
+# Across
+
+## Across {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   We can apply functions to many columns at once
+    -   This is done using the `across()` function
+    -   It goes inside `mutate()` and `summarize()`
+
+::: {.fragment .mt1}
+-   `across()` pairs very well with tidy selection
+    -   e.g., do this to variables starting with "x"
+    -   e.g., do this to all numeric variables
+:::
+
+::: {.fragment .mt1}
+-   Advanced: "Anonymous functions"
+    -   Call current col x, then round x to 2 digits
+    -   e.g., `\(x) round(x, digits = 2)`
+:::
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li krmfspeu trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Across Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+starwars
+
+# Applying the same mutation to multiple variables is a pain
+starwars |> 
+  mutate(
+    hair_color = factor(hair_color),
+    skin_color = factor(skin_color),
+    eye_color = factor(eye_color),
+  )
+
+# dplyr 1.0.0 added across() to make this easier
+
+starwars |> 
+  mutate(
+    across(
+      .cols = c(hair_color, skin_color, eye_color), 
+      .fns = factor
+    )
+  )
+
+# We can also use tidyverse shortcuts like the colon (:)
+starwars |> 
+  mutate(
+    across(
+      .cols = c(hair_color:eye_color), 
+      .fns = factor
+    )
+  )
+
+# We can also compress it to take up less space
+starwars |> 
+  mutate(across(c(hair_color:eye_color), factor))
+
+# We can also use a tidy selection helper when appropriate
+starwars |> 
+  mutate(
+    across(
+      .cols = ends_with("color"), 
+      .fns = factor
+    )
+  )
+
+starwars |>  
+  mutate(across(.cols = where(is.character), .fns = factor))
+
+# For more control, we use an anonymous function
+
+starwars |> 
+  mutate(
+    height = height * 1000,
+    mass = mass * 1000
+  )
+
+starwars |> 
+  mutate(
+    across(
+      .cols = c(height, mass), 
+      .fns = \(x) x * 1000
+    )
+  )
+
+# Across with summarize
+
+starwars |> 
+  summarize(
+    height = mean(height, na.rm = TRUE),
+    mass = mean(mass, na.rm = TRUE),
+    birth_year = mean(birth_year, na.rm = TRUE)
+  )
+
+starwars |> 
+  summarize(
+    across(
+      .cols = c(height, mass, birth_year), 
+      .fns = \(x) mean(x, na.rm = TRUE)
+    )
+  )
+```
+
+
+# Scale Scores
+
+## Scale Scores {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   In social science, we often use [scale scores]{.b .blue}
+    -   Multiple similar items are combined
+    -   Sums and means are both common
+
+::: {.fragment .mt1}
+-   Calculating scale scores from items is tricky
+    -   When each item is a column...
+    -   ...we calculate scale scores **per row**
+:::
+
+::: {.fragment .mt1}
+-   We can either group per row (using `.by`)
+    -   Or use special row-based functions
+:::
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li bdfzpkxv trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Scale Scores Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# Simulate a longitudinal dataset with a five-item scale
+df <- 
+  tibble(
+    subject = rep(101:103, each = 3),
+    visit = rep(1:3, times = 3),
+    q1 = sample(x = 0:4, size = 9, replace = TRUE),
+    q2 = sample(x = 0:4, size = 9, replace = TRUE),
+    q3 = sample(x = 0:4, size = 9, replace = TRUE),
+    q4 = sample(x = 0:4, size = 9, replace = TRUE),
+    q5 = sample(x = 0:4, size = 9, replace = TRUE),
+  ) |> 
+  print()
+
+# USECASE: Calculate subjects' scores per visit
+
+# Solution 1 (calculate sums and means "by-hand")
+df |> 
+  mutate(
+    total_q = q1 + q2 + q3 + q4 + q5,
+    mean_q = (q1 + q2 + q3 + q4 + q5) / 5
+  )
+
+# PITFALL: Attempt to use functions for convenience
+df |> 
+  mutate(
+    total_q = sum(c(q1, q2, q3, q4, q5)),
+    mean_q = mean(c(q1, q2, q3, q4, q5))
+  )
+# But the answers aren't what we wanted! These are ungrouped mutates!
+
+# Solution 2 (turn them into grouped mutates)
+df |> 
+  mutate(
+    total_q = sum(c(q1, q2, q3, q4, q5)),
+    mean_q = mean(c(q1, q2, q3, q4, q5)),
+    .by = c(subject, visit)
+  )
+# These are the answers we wanted
+
+# USECASE: Can we use tidy selection here?
+
+# The : operator does work if they are in order!
+df |> 
+  mutate(
+    total_q = sum(q1:q5),
+    mean_q = mean(q1:q5),
+    .by = c(subject, visit)
+  )
+
+# But starts_with() doesn't...
+df |> 
+  mutate(
+    total_q = sum(starts_with("q")),
+    mean_q = mean(starts_with("q")),
+    .by = c(subject, visit)
+  )
+# Error...
+
+# Solution 3 (use row functions and pick, no .by necessary)
+df |> 
+  mutate(
+    total_q = rowSums(pick(starts_with("q"))),
+    mean_q = rowMeans(pick(starts_with("q")))
+  )
+
+# PITFALL (don't include your sum in your mean)
+df |> 
+  mutate(
+    q_total = rowSums(pick(starts_with("q"))),
+    q_mean = rowMeans(pick(starts_with("q")))
+  )
+# Note that the means are now much higher because they include q_total
+# This is because q_total also starts with q and comes first in mutate()
+```

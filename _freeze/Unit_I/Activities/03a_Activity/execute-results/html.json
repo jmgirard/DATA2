@@ -1,0 +1,16 @@
+{
+  "hash": "f8e3db2544c51d5e9c21d6c30ed73a93",
+  "result": {
+    "markdown": "---\ntitle: \"Lecture [03a] Activity\"\n---\n\n\n![](../../img/programmer_2780E3.svg){.hero}\n\n## Question 1\n\nWhich of the following commands do you think will create an error in R? Why?\n\na) `score@T1 <- 3.2`\nb) `score_at_T1 <- 3.2`\nc) `score at T1 <- 3.2`\nd) `1_score <- 3.2`\ne) `ScoreAtTime1 <- 3.2`\n\nMake your best guesses just by looking at the commands and then check your guesses by running the commands in R. *Bonus:* Can you come up with a better name for this variable?\n\n<p><details>\n<summary>Click here for the answer key</summary>\n<blockquote>\n\n| Code | Result (reason) |\n|------|-----------------|\n|`score@T1 <- 3.2`|🛑 Error (`@` not allowed in name)|\n|`score_at_T1 <- 3.2`|✅ No Error|\n|`score at T1 <- 3.2`|🛑 Error (spaces not allowed in name)|\n|`1_score <- 3.2`|🛑 Error (name can't start with a number)|\n|`ScoreAtTime1 <- 3.2`|✅ No Error|\n\n</blockquote></details></p>\n\n## Question 2\n\na) Use the `cos()` function to calculate the cosine of 3 and assign it to a variable called `y`. Print the value of `y` to the console. \nb) Use a function to round `y` to the nearest whole number.\nc) Use a function to round `y` to two decimal places.\n\n<p><details>\n<summary>Click here for the answer key</summary>\n<blockquote>\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Part (a)\ny <- cos(3)\ny\n## [1] -0.9899925\n\n# Part (b)\nround(y)\n## [1] -1\n\n# Part (c)\nround(y, digits = 2)\n## [1] -0.99\n```\n:::\n\n\n</blockquote></details></p>\n\n## Question 3\n\nWhat do you expect the result to be for the following commands?\n\na) `sqrt(4 + 5)`\nb) `sqrt(4) + 5`\n\nMake your best guesses just by looking at the commands and then check your guesses by running the commands in R.\n\n<p><details>\n<summary>Click here for the answer key</summary>\n<blockquote>\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Part (a): Add then square root, same as sqrt(9)\nsqrt(4 + 5)\n## [1] 3\n\n# Part (b): Square root then add, same as 2 + 5\nsqrt(4) + 5 \n## [1] 7\n```\n:::\n\n\n</blockquote></details></p>\n\n---\n\n*Note that there is no need to turn in Activities. These are just for practice!*\n",
+    "supporting": [
+      "03a_Activity_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

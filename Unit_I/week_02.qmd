@@ -1,0 +1,61 @@
+---
+title: "Week 2: Overview"
+format:
+  html:
+    page-layout: full
+---
+
+## [02a] Meeting R
+
+### Topics
+
+- R and RStudio
+- Console
+- Scripts
+
+### Slides
+
+<iframe class="slide-deck" src="./Presentations/02a_Slides.html" title="[02a] Presentation">
+</iframe>
+
+[Click here to view the slides in their own window.](./Presentations/02a_Slides.html)
+
+### Recording
+
+<iframe id="kmsembed-1_q6l5xos7" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_q6l5xos7/uiConfId/45147491/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="399/800 Lecture [02a]"></iframe>
+
+### Activity
+
+- [Activity \[02a\]](./Activities/02a_Activity.html)
+
+## [02b] Getting Organized
+
+### Topics
+
+- Projects
+- Quarto
+- Markdown
+
+### Slides
+
+<iframe class="slide-deck" src="./Presentations/02b_Slides.html" title="[02b] Presentation">
+</iframe>
+
+### Recording
+
+<iframe id="kmsembed-1_gyexdupi" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_gyexdupi/uiConfId/45147491/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="399/800 Lecture [02b]"></iframe>
+
+### Activity
+
+- [Activity \[02b\]](./Activities/02b_Activity.html)
+
+### Optional Readings
+
+- [Hello, Quarto](https://quarto.org/docs/get-started/hello/rstudio.html) Getting Started with RStudio Guide
+- [Markdown Basics](https://quarto.org/docs/authoring/markdown-basics.html)
+
+## Week 2 Assignment
+
+### Instructions
+
+- [Week 2 Assignment](./Assignments/02_Assignment.html)

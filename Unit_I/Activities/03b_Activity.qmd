@@ -1,0 +1,102 @@
+---
+title: "Lecture [03b] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1 (Vectors)
+
+Imagine that you ran a stand selling bananas for three days. On the first day, you sold \$30 worth of bananas and spent \$15 on supplies. On the second day, you sold \$50 worth of bananas and spent \$15 on supplies. On the third day, you sold $40 worth of bananas and spent \$100 on repairs to the stand (due to an unfortunate fire).
+
+a) Create two vectors named `sales` and `costs` to store how much you sold and how much you spent on each day, respectively.
+
+b) Subtract the `costs` object from the `sales` object and save the result to a new object named `profits`. Print this to see your profits per day.
+
+c) Use the `sum()` function to calculate your total profits over all three days. Was your effort *fruitful*, i.e., did you make money overall?
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| collapse: true
+
+# Part (a)
+sales <- c(30, 50, 40)
+costs <- c(15, 15, 100)
+
+# Part (b)
+profits <- sales - costs
+profits
+
+# Part (c): No, I lost money!
+sum(profits)
+```
+
+</blockquote></details></p>
+
+## Question 2 (Strings)
+
+a) Create a character vector named `flavors` that contains the following strings and print it to the console: 
+- Cookies & Cream
+- Americone Dream (R)
+- Bob Marley's 1 Love
+b) Use a function to calculate the number of strings in `flavors`.
+c) Use another function to calculate the number of characters in each string in `flavors`.
+d) Let R know how you feel about ice cream by using a function to either make all the characters in `flavors` uppercase (you LOVE ice cream) or lowercase (you don't love ice cream).
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| collapse: true
+
+# Part (a)
+flavors <- c("Cookies & Cream", "Americone Dream (R)", "Bob Marley's 1 Love")
+flavors
+
+# Part (b)
+length(flavors)
+
+# Part (c)
+nchar(flavors)
+
+# Part (d)
+toupper(flavors)
+tolower(flavors)
+```
+
+</blockquote></details></p>
+
+## Question 3 (Packages)
+
+a) Install the `tidyverse` package. It may take several minutes to install because it contains several sub-packages that we will use in this class.
+b) Use a function we discussed in lecture to view the vignettes included in the `tidyverse` package (hint: be careful about uppercase and lowercase letters in the name of the function).
+c) In the new window that opens, click the link that says "HTML" next to "Welcome to the tidyverse" and read that vignette (it is relatively brief and will prepare you for next week).
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| collapse: true
+#| eval: false
+
+# Part (a)
+install.packages("tidyverse")
+# or RStudio > Extras pane > Packages tab > Install button
+
+# Part (b)
+browseVignettes("tidyverse")
+
+# Part (c)
+```
+
+<https://tidyverse.tidyverse.org/articles/paper.html>
+
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

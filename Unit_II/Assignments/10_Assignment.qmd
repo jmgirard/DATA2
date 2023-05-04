@@ -1,0 +1,119 @@
+---
+title: "Week 10 Assignment"
+---
+
+![](../../img/programming_357EDD.svg){.hero}
+
+## Instructions
+
+*Create a new Quarto document (HTML format), clear out the boilerplate code/text, and use this document to store your answers to each of the six questions below. Be sure to enable `embed-resources` using the header below. If your answer involves writing text, then use markdown to write 2--4 sentences per question; if you answer involves running code, then use one or more code chunks. For questions that ask you to fix code, correct any errors (while achieving the stated goal) and include only the working code in your document.*
+
+```markdown
+---
+format: 
+  html:
+    embed-resources: true
+---
+```
+
+*Please clearly mark which part of your document is answering which question (e.g., using markdown headings) and remove any "scratch work" or failed attempts from your document before submitting it. Finally, note that many essay-style questions will require you to read between the lines and use your imagination (as opposed to just looking up the answer in the lecture).*
+
+## Question 1
+
+a. Download the `records.csv` file from Canvas, put it in your project folder, and import it into R. Examine the tibble to familiarize yourself with it; it contains world records for several running events (as of October 2020). 
+
+b.    Add a new variable to the tibble called `kmph` that contains the average speed attained in each record in kilometers per hour (you will need to calculate this from existing variables - be careful about units). Save this change so that you can use this new variable in future questions.
+
+
+## Question 2
+
+a) Create a summary table using your data from Question 1 that contains the minimum, mean, and maximum speeds (in kmph).
+
+b) Create a summary table using your data from Question 1 that contains the minimum time (in seconds) and maximum speed (in kmph) for each distance (in meters).
+
+
+## Question 3
+
+a) Create a summary table using your data from Question 1 that counts the number of running world records each nation held and the number of distinct world-record-holding runners it had produced (as of 2020).
+
+<p><details><summary>Hint</summary><blockquote>
+The output should look something like this:
+
+```{r}
+#| message: false
+#| echo: false
+
+library(tidyverse)
+records <- read_csv("../../data/records.csv")
+
+records |> 
+  summarize(
+    records = n(),
+    runners = n_distinct(athlete),
+    .by = nation
+  )
+```
+
+</blockquote></details></p>
+
+b) Update your tibble from Question 1 to add a new column that contains the number of world-records each athlete holds.
+
+<p><details><summary>Hint</summary><blockquote>
+The output should look something like this:
+
+```{r}
+#| echo: false
+
+records |> 
+  mutate(
+    records = n(),
+    .by = athlete
+  )
+```
+
+</blockquote></details></p>
+
+
+## Question 4
+
+a) Help me fix my code! I want to extract a subset of variables using tidy selection and then use `across()` to apply the `sqrt()` function to several of them.
+
+```{r, renv.ignore=TRUE}
+#| error: true
+
+diamonds |> 
+  select(is.numeric()) |> 
+  mutate(across(x, y, z), sqrt)
+```
+
+
+b) Help me fix my code! I want to create a new summary table that contains the median and maximum number of monthly listing for each city. But I'm getting some weird thing back...
+
+```{r, renv.ignore=TRUE}
+#| error: true
+
+txhousing |> 
+  summary(
+    mdn_listings = median(listings, na.rm = TRUE),
+    max_listings = max(listings, na.rm = TRUE),
+    by = city
+  )
+```
+
+
+## Question 5
+
+a) Load the `penguins` tibble from the \{palmerpenguins\} package. Use `across()` to round all variables with names that end in "_mm" to 0 digits (the default). Save the output as `penguins2` so you can use it again.
+
+b) Now use an approach we discussed in class to add a new column to the `penguins2` tibble that contains the mean of these rounded variables for each penguin (removing any missing values).
+
+
+
+## Question 6
+
+How do the following four operations differ: ungrouped mutate, ungrouped summarize, grouped mutate, grouped summarize? Give a brief example of a time when each would be useful.
+
+
+---
+
+✅ Done! *Please save and then render your document to an HTML file. Check it over to make sure it is complete (and rendered properly) and then upload this file to Canvas by the deadline listed on the syllabus. Note that, if any of your code chunks has an error in it, the HTML file will not render properly (this is why removing scratch work is important).*

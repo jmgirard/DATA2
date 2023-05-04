@@ -1,0 +1,72 @@
+---
+title: "Week 10: Wrangle"
+format:
+  html:
+    page-layout: full
+---
+
+## [10a] Summarization
+
+### Topics
+
+- Summarize
+- Grouped Summarize
+- Grouped Mutate
+
+### Slides
+
+<iframe class="slide-deck" src="./Presentations/10a_Slides.html" title="[10a] Presentation">
+</iframe>
+
+[Click here to view the slides in their own window.](./Presentations/10a_Slides.html)
+
+### Recording
+
+<iframe id="kmsembed-1_zm6j6j44" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_zm6j6j44/uiConfId/45147491/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="399/800 Lecture [10a]"></iframe>
+
+### Activity
+
+- [Activity \[10a\]](./Activities/10a_Activity.html)
+
+### Optional Readings
+
+- <https://r4ds.had.co.nz/transform.html#grouped-summaries-with-summarise>
+
+
+## [10b] Convenience
+
+### Topics
+
+- Tidy Selection
+- Across
+- Scale Scores
+
+### Slides
+
+<iframe class="slide-deck" src="./Presentations/10b_Slides.html" title="[10b] Presentation">
+</iframe>
+
+### Recording
+
+<iframe id="kmsembed-1_6b899wo6" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_6b899wo6/uiConfId/45147491/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="399/800 Lecture [10b]"></iframe>
+
+### Activity
+
+- [Activity \[10b\]](./Activities/10b_Activity.html)
+
+### Optional Readings
+
+- <https://tidyselect.r-lib.org/reference/language.html>
+- <https://dplyr.tidyverse.org/articles/colwise.html>
+- <https://dplyr.tidyverse.org/articles/rowwise.html>
+
+
+## Week 10 Assignment
+
+### Instructions
+
+- [Week 10 Assignment](./Assignments/10_Assignment.html)
+
+### Data Files
+
+- <a href="../data/records.csv" download="records.csv">records.csv</a>

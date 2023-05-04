@@ -1,0 +1,86 @@
+---
+title: "Lecture [03a] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1
+
+Which of the following commands do you think will create an error in R? Why?
+
+a) `score@T1 <- 3.2`
+b) `score_at_T1 <- 3.2`
+c) `score at T1 <- 3.2`
+d) `1_score <- 3.2`
+e) `ScoreAtTime1 <- 3.2`
+
+Make your best guesses just by looking at the commands and then check your guesses by running the commands in R. *Bonus:* Can you come up with a better name for this variable?
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+| Code | Result (reason) |
+|------|-----------------|
+|`score@T1 <- 3.2`|🛑 Error (`@` not allowed in name)|
+|`score_at_T1 <- 3.2`|✅ No Error|
+|`score at T1 <- 3.2`|🛑 Error (spaces not allowed in name)|
+|`1_score <- 3.2`|🛑 Error (name can't start with a number)|
+|`ScoreAtTime1 <- 3.2`|✅ No Error|
+
+</blockquote></details></p>
+
+## Question 2
+
+a) Use the `cos()` function to calculate the cosine of 3 and assign it to a variable called `y`. Print the value of `y` to the console. 
+b) Use a function to round `y` to the nearest whole number.
+c) Use a function to round `y` to two decimal places.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| collapse: true
+
+# Part (a)
+y <- cos(3)
+y
+
+# Part (b)
+round(y)
+
+# Part (c)
+round(y, digits = 2)
+```
+
+</blockquote></details></p>
+
+## Question 3
+
+What do you expect the result to be for the following commands?
+
+a) `sqrt(4 + 5)`
+b) `sqrt(4) + 5`
+
+Make your best guesses just by looking at the commands and then check your guesses by running the commands in R.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| collapse: true
+
+# Part (a): Add then square root, same as sqrt(9)
+sqrt(4 + 5)
+
+# Part (b): Square root then add, same as 2 + 5
+sqrt(4) + 5 
+```
+
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

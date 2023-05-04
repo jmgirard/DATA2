@@ -1,0 +1,115 @@
+---
+title: "Syllabus"
+subtitle: "[PSYC/ECON/POLS 399] Spring 2023"
+format:
+  html:
+    page-layout: full
+---
+
+## Course Materials
+
+Most of the material that students will be required to learn will come from the course lectures, activities, and assignments. However, students' learning will also be supplemented by assigned readings from the following textbook. It is available in physical/printed form and you are welcome to purchase a copy if you prefer printed books. However, a web-based version is also available for free and I recommend you try this version as it is more frequently updated, easier to navigate (without pagination), and allows you to easily follow along by copying and pasting its examples.
+
+- [R for Data Science](https://r4ds.had.co.nz/) by Hadley Wickham & Garrett Grolemund
+
+The following texts are where I would recommend you turn after completing this course (or during it, if you are feeling ambitious) to dive into more advanced topics about visualization and programming, respectively.
+
+- [ggplot2: Elegent graphics for data analysis (3rd Edition)](https://ggplot2-book.org/) by Hadley Wickham
+- [Advanced R (2nd Edition)](https://adv-r.hadley.nz/) by Hadley Wickham
+
+## Learning Objectives
+
+By the end of this course, my sincere hope is that students will have:
+
+- Developed an appreciation for the value of data science in psychology
+- Gained proficiency and confidence in foundational data science skills
+- Applied these skills to extract knowledge and insights from real-world data
+- Laid the groundwork for creating a data science portfolio, blog, or website
+- Been exposed to advanced data science topics that piqued their interest
+- Pushed through enough uncertainty to feel empowered to continue learning
+- Begun accepting that silly mistakes are inevitable and need to be planned for
+- Automated a tedious task that no human will ever have to do manually again
+- Benefited from the generosity of others and paid it forward to someone else
+- Felt like a total fool, an absolute wizard, and just about everything in between
+- Found their inner child, pursued some whimsies, and had fun along the way
+
+## Grading
+
+### Grading Scheme
+
+Grades will be assigned using the standard scale where the following thresholds must be met to earn each grade:
+
+| Letter Grade | Grade Points | Threshold |
+|--------------|--------------|-----------|
+| A            | 4.0          | 93\%      |
+| A-           | 3.7          | 90\%      |
+| B+           | 3.3          | 87\%      |
+| B            | 3.0          | 83\%      |
+| B-           | 2.7          | 80\%      |
+| C+           | 2.3          | 77\%      |
+| C            | 2.0          | 73\%      |
+| C-           | 1.7          | 70\%      |
+| D+           | 1.3          | 67\%      |
+| D            | 1.0          | 63\%      |
+| D-           | 0.7          | 60\%      |
+
+### Grade Components
+
+- 60\% Homework Assignments (6\% each × 10)
+- 20\% Unit I Project (2\% Planning Document + 14\% Report Document + 4\% Debreifing Document)
+- 20\% Unit II Project (2\% Planning Document + 14\% Report Document + 4\% Debreifing Document)
+
+### Homework Assignments
+
+Homework assignments are frequent, brief, and standardized; they provide students opportunities to practice what they learned during lecture and receive relatively rapid feedback. Homework focuses on more concrete educational objectives (e.g., remembering, understanding, and applying). To complete a homework assignment, students should view the HTML file on Canvas corresponding to it and follow its instructions. Doing so will involve creating a new file (e.g., an RMarkdown document), which should then be uploaded to Canvas before the assignment deadline.
+
+Homework should be completed by each student individually to maximize learning. Students are welcome to help each other if they get stuck but I encourage them to try to push through any frustration and uncertainty before asking for help, as overcoming such obstacles is critical to building confidence and mastery. Along these lines, if a classmate asks you for help, I recommend initially asking them to describe what they have already tried and then giving hints (rather than jumping to providing complete solutions). That said, please reach out to me with questions, especially if an assignment seems to contain errors, be unclear in its directions, or requires considerably more than two hours to complete.
+
+### Projects
+
+Unit projects are infrequent, extended, and group-based; they provide students opportunities to diversify, specialize, and connect the course material to their personal interests. Unit projects focus on more abstract educational objectives (e.g., analyzing, evaluating, and creating). Unit projects also focus on collaboration within small data science teams, providing students the opportunity to hone valuable communication and organization skills.
+
+The Unit I Project will require two weeks of work and will have three graded components: (1) each team will submit a project planning document at the end of the first week and receive a shared grade, (2) each team will submit a report document at the end of the second week and receive a shared grade, and (3) each student will submit a separate debriefing document at the end of the second week and receive an individual grade.
+
+The Unit II Project will require two weeks of work and will have three graded components: (1) each team will submit a project planning document at the end of the first week and receive a shared grade, (2) each team will submit a report document at the end of the second week and receive a shared grade, and (3) each student will submit a separate debriefing document at the end of the second week and receive an individual grade.
+
+Collaborative work is nearly ubiquitous in academic and industrial research settings and it is important for students to learn how to navigate these settings effectively. That said, I am here to help facilitate communication within groups if necessary. So please reach out to me as soon as possible if there are problems within your group that you are having trouble addressing (e.g., decisional deadlocks, disrespectful communication, or shirked responsibilities).
+
+## University Policies
+
+Below, I summarize several relevant policies. The [KU Policy Library](https://policy.ku.edu/) contains a more complete list with more details.
+
+### Accommodations for disabilities
+
+The Student Access Center coordinates academic accommodations and services for all eligible KU students with disabilities. If you have a disability for which you wish to request accommodations and have not contacted SAC, please do so as soon as possible. They are located in 22 Strong Hall and can be reached at 785-864-4064 (V/TTY). Information about their services can be found at <www.access.ku.edu>. Please contact me privately in regard to your needs in this course.
+
+### Academic Misconduct
+
+Academic misconduct by a student shall include, but not be limited to, disruption of classes; threatening an instructor or fellow student in an academic setting; giving or receiving of unauthorized aid on examinations or in the preparation of notebooks, themes, reports or other assignments; knowingly misrepresenting the source of any academic work; unauthorized changing of grades; unauthorized use of University approvals or forging of signatures; falsification of research results; plagiarizing of another’s work; violation of regulations or ethical codes for the treatment of human and animal subjects; or otherwise acting dishonestly in research. After consultation with the department chairperson, an instructor may, with due notice to the student, treat as unsatisfactory (1) any student work that is a product of academic misconduct, or (2) a student’s performance for a course when there are severe or repeated instances of academic misconduct. See [USRR 2.6](http://policy.ku.edu/governance/USRR#art2sect6) for more information.
+
+### Commercial Note-Taking
+
+Pursuant to the University of Kansas’ [Policy on Commercial Note-Taking Ventures](http://policy.ku.edu/provost/commercial-note-taking), commercial note-taking is not permitted in this course. Lecture notes and course materials may not be sold to any person or entity in any form. Any student engaged in or contributing to the commercial exchange of notes or course materials will be subject to discipline, including academic misconduct charges, in accordance with University policy. Please note that note-taking provided by a student volunteer for a student with a disability, as a reasonable accommodation under the ADA, is not the same as commercial note-taking.
+
+### Diversity and Inclusion
+
+The University of Kansas supports an inclusive learning environment in which diversity and individual differences are understood, respected, and appreciated. We believe that all students benefit from training and experiences that will help them to learn, lead, and serve in an increasingly diverse society. All members of our campus community must accept the responsibility to demonstrate civility and respect for the dignity of others. Expressions or actions that disparage a person’s or group’s race, ethnicity, nationality, culture, gender, gender identity / expression, religion, sexual orientation, age, veteran status, or disability are contrary to the mission of the University. We expect that KU students, faculty, and staff will promote an atmosphere of respect for all members of our KU community. This is an inclusive classroom. At KU, administrators, faculty, and staff are committed to the creation and maintenance of “inclusive learning” spaces. These are classrooms, labs, and other places of learning where you will be treated with respect and dignity and where all individuals are provided equitable opportunity to participate, contribute, and succeed.
+
+## Course Policies
+
+### Attendance
+
+Attendance at course meetings is strongly encouraged but not required. Video recordings of the lectures will be made available online as soon as possible (usually within hours). However, I cannot guarantee that the recording equipment and software will always work as intended, so please attend in person whenever possible.
+
+### Late Submissions
+
+Assignments and project components that are submitted after the deadline (usually 11:59pm CT on Saturday) may receive reduced credit based on how late they are submitted and other extenuating circumstances (e.g., the reason for the submission being late, the level of communication provided by the student about the late submission, and the student's prior behavior in the course). Students are encouraged to reach out to me before the deadline if they expect they may not be able to submit an assignment or project component on time. Note that, in general, I would prefer students to (a) submit high quality and complete work a day or two after the deadline rather than (b) submit low quality or incomplete work right before the deadline. However, the longer a student waits to submit their work after the deadline, the less credit they are likely to receive.
+
+### Asking for Help
+
+You are very welcome to ask the instructor and/or teaching assistant for clarification and assistance on course materials (e.g., lectures, assignments, and projects). However, we ask that you do so during class or office hours. We will try to respond to emails as quickly as possible, but cannot guarantee that we will be able to answer a question outside of these times (especially on weekends). Thus, given that homework assignments are due on Saturday nights, it is a good idea to take a look at the assignments after class on Wednesday so that you can decide whether you need to visit the teaching assistant's office hours on Thursday or the instructor's office hours on Friday.
+
+### Co-locating with PSYC 792
+
+Note that this course will be co-locating with a graduate-level course (PSYC 792). This means that graduate students will also be present at the lectures and will complete the same homework assignments. However, the graduate-level course is differentiated by more advanced projects. I don't anticipate this will cause any issues for students in either course, but let me know if you have any questions or concerns about this.
+

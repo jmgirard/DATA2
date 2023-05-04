@@ -1,0 +1,329 @@
+---
+format: 
+  revealjs:
+    css: ../../styles.css
+    slide-number: true
+    show-slide-number: all
+    progress: true
+    history: true
+    hash-type: number
+    theme: default
+    code-block-background: true
+    highlight-style: zenburn
+    code-link: false
+    code-copy: true
+    pagetitle: "Foundations of Data Science"
+    author-meta: "Jeffrey Girard"
+    date-meta: "2023-02-15"
+    semester: "Spring 2023"
+    course: "399/800"
+    lecture: "05b"
+---
+
+::: {.my-title}
+# [Foundations of]{.my-subtitle}<br />[Data Science]{.blue}
+
+::: {.my-grey}
+[{{< meta semester >}} | Course {{< meta course >}}]{}<br />
+[Jeffrey M. Girard | Lecture {{< meta lecture >}}]{}
+:::
+
+![](../../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
+:::
+
+## Roadmap
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+1. Variation
+  
+2. Covariation
+
+3. Layering
+
+4. Activity
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li xtkehzkm trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+
+# Variation
+
+## Variation {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Variable distributions]{.b .blue} are critical in data analysis
+    -   What are the most and least [common values]{.b .green}?
+    -   What are the [extrema]{.b .green} (min and max values)?
+    -   Are there any [outliers]{.b .green} or impossible values?
+    -   How much [spread]{.b .green} is there in the variable?
+    -   What [shape]{.b .green} does the distribution take?
+
+::: {.fragment .mt1}
+-   Visualization helps us to understand [variation]{.b .blue}
+    -   It can also [communicate]{.b .green} it to others
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li wovwohsm trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+## Variation Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+salaries <- read_csv("salaries.csv")
+
+# ==============================================================================
+
+# USECASE: Create bar plots to count discrete variable frequency
+
+ggplot(salaries, aes(x = sex)) + geom_bar()
+
+ggplot(salaries, aes(x = rank)) + geom_bar()
+
+ggplot(salaries, aes(x = discipline)) + geom_bar()
+
+ggplot(salaries, aes(y = discipline)) + geom_bar()
+
+# ==============================================================================
+
+# PITFALL: Don't try to create a bar plot for a continuous variable
+
+ggplot(salaries, aes(x = salary)) + geom_bar() # not what we wanted
+
+# ==============================================================================
+
+# USECASE: Instead create histograms to count continuous variable bin frequency
+
+ggplot(salaries, aes(x = salary)) + geom_histogram() # better
+
+ggplot(salaries, aes(x = salary)) + 
+  geom_histogram(bins = 20)
+
+ggplot(salaries, aes(x = salary)) + 
+  geom_histogram(binwidth = 2)
+
+ggplot(salaries, aes(x = salary)) + 
+  geom_histogram(binwidth = 2, color = "red", linewidth = 1)
+
+ggplot(salaries, aes(x = salary)) + 
+  geom_histogram(binwidth = 2, color = "red", linewidth = 1, fill = "white")
+# ==============================================================================
+
+# PITFALL: Don't try to create histograms for categorical variables
+
+ggplot(salaries, aes(x = rank)) + geom_histogram() #error
+
+# ==============================================================================
+
+# USECASE: Or create density plots or boxplots
+
+ggplot(salaries, aes(x = salary)) + geom_density()
+# Higher density means relatively more common
+
+ggplot(salaries, aes(x = salary)) + 
+  geom_density(color = "red", linewidth = 1, fill = "white")
+
+ggplot(salaries, aes(x = salary)) + geom_boxplot()
+# The box goes from 25th to 75th percentile
+# The thick line inside the box is the 50th percentile (median)
+# The whisker lines outside the box show non-outlier points
+# The dots outside the whisker lines show outlier points
+```
+
+
+# Covariation
+
+## Covariation {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   We are often interested in [covariation]{.b .blue}
+    -   Does variation in X go with variation in Y?
+    -   Do higher X scores go with higher Y scores?
+    -   Do groups differ on Y score distributions?
+    -   Do certain groups tend to go together?
+
+::: {.fragment .mt1}
+-   We can extend variation geoms into covariation
+    -   The geoms we use will heavily depend on...
+    -   ...are the variables [continuous]{.b .green} or [discrete]{.b .green}?
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li fjeqvghr trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+## Covariation Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+salaries <- read_csv("salaries.csv")
+
+# Continuous-by-continuous = Scatterplot
+ggplot(salaries, aes(x = yrs.since.phd, y = salary)) + geom_point()
+
+
+# Continuous-by-discrete = Boxplots
+ggplot(salaries, aes(x = rank, y = salary)) + geom_point() # not great
+
+ggplot(salaries, aes(x = rank, y = salary)) + geom_boxplot() # better
+
+ggplot(salaries, aes(x = salary, y = rank)) + geom_boxplot() # better
+
+
+# Continuous-by-discrete = Violin
+
+ggplot(salaries, aes(x = salary, y = rank)) + geom_violin() # better
+
+ggplot(salaries, aes(x = salary, y = rank)) + 
+  geom_violin(draw_quantiles = c(0.25, 0.50, 0.75))
+
+ggplot(salaries, aes(x = salary, y = rank)) + 
+  geom_violin(draw_quantiles = c(0.05, 0.95))
+
+
+# Continuous-by-discrete = Density
+
+ggplot(salaries, aes(x = salary, y = rank)) + 
+  geom_density(linewidth = 1) # error
+
+ggplot(salaries, aes(x = salary, color = rank)) + 
+  geom_density(linewidth = 1) # correct
+
+
+# Discrete-by-discrete = Jitter
+
+ggplot(salaries, aes(x = rank, y = sex)) +
+  geom_point() # not great - all the points are on top on one another
+
+ggplot(salaries, aes(x = rank, y = sex)) + 
+  geom_jitter() # okay - the points are now randomly pushed a small amount
+
+ggplot(salaries, aes(x = rank, y = sex)) + 
+  geom_jitter(width = 0.25, height = 0.25) # we can control how much to push
+
+## We will learn better options (using summarizing and positioning) in Unit II
+```
+
+
+# Layering
+
+## Layering {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   ggplot2 uses a [layered]{.b .blue} grammar of graphics
+    -   We can keep [stacking geoms]{.b .green} on top
+
+::: {.fragment .mt1}
+-   Layering adds a lot of possibilities
+    -   We can convey [more complex]{.b .green} ideas
+    -   We can learn more about our data
+:::
+
+::: {.fragment .mt1}
+-   But we can still describe these graphics
+    -   Just [describe each layer]{.b .green} in turn
+    -   And describe the layers' ordering
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li ikwcijxm trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+## Layering Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+mpg
+
+# ==============================================================================
+
+# USECASE: Add a smooth geom (i.e., line of best fit)
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth()
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+# ==============================================================================
+
+# USECASE: Add a line geom (i.e., connecting points)
+
+economics
+
+ggplot(economics, aes(x = date, y = unemploy)) + 
+  geom_point()
+
+ggplot(economics, aes(x = date, y = unemploy)) + 
+  geom_point() +
+  geom_line(color = "orange", size = 1) #line geom second = line on top
+
+ggplot(economics, aes(x = date, y = unemploy)) + 
+  geom_line(color = "orange", size = 1) + #line geom first = line on bottom
+  geom_point()
+
+# ==============================================================================
+
+# USECASE: Add reference line geoms
+
+ggplot(economics, aes(x = date, y = unemploy)) + 
+  geom_hline(yintercept = 0, color = "orange", size = 1) +
+  geom_line(color = "blue", size = 1) +
+  geom_point()
+
+ggplot(economics, aes(x = date, y = unemploy)) + 
+  geom_vline(xintercept = 7.5, color = "orange", size = 1) +
+  geom_line(color = "blue", size = 1) +
+  geom_point() 
+
+ggplot(economics, aes(x = date, y = unemploy)) + 
+  geom_abline(intercept = 4000, slope = 0.5, color = "orange", size = 1) +
+  geom_line(color = "blue", size = 1) +
+  geom_point() 
+
+# ==============================================================================
+
+# USECASE: Combine different types of geoms
+
+ggplot(mpg, aes(x = hwy, y = class)) + 
+  geom_violin(draw_quantiles = 0.5) + 
+  geom_jitter(color = "firebrick", height = 0.25, width = 0.25)
+```

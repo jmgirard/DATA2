@@ -1,0 +1,432 @@
+---
+format: 
+  revealjs:
+    css: ../../styles.css
+    slide-number: true
+    show-slide-number: all
+    progress: true
+    history: true
+    hash-type: number
+    theme: default
+    code-block-background: true
+    highlight-style: zenburn
+    code-link: false
+    code-copy: true
+    pagetitle: "Foundations of Data Science"
+    author-meta: "Jeffrey Girard"
+    date-meta: "2023-04-12"
+    semester: "Spring 2023"
+    course: "399/800"
+    lecture: "13b"
+---
+
+::: {.my-title}
+# [Foundations of]{.my-subtitle}<br />[Data Science]{.blue}
+
+::: {.my-grey}
+[{{< meta semester >}} | Course {{< meta course >}}]{}<br />
+[Jeffrey M. Girard | Lecture {{< meta lecture >}}]{}
+:::
+
+![](../../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
+:::
+
+## Roadmap: Automation
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+1. Control Flow
+  
+2. Custom Functions
+
+3. Basic Iteration
+
+4. Activity
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li xtkehzkm trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+# Control Flow
+
+## Control Flow {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+TODO: Missing, fill in
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li usjxhgom trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Control Flow Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+library(tidyverse)
+
+# if_else to assign to one of two values conditionally
+
+## simple example
+x <- 6
+if_else(
+  condition = x > 10,
+  true = "large",
+  false = "small"
+)
+
+## Compressed
+if_else(x > 10, "large", "small")
+
+## Vectorized
+x <- c(6, 16, 3)
+if_else(x > 10, "large", "small")
+
+## Nested
+if_else(
+  condition = x > 10,
+  true = "large",
+  false = if_else(x > 5, "medium", "small")
+)
+
+# case_when to assign to one of three+ values conditionally
+
+## simple example
+x <- c(6, 16, 3)
+case_when(
+  x > 10 ~ "large",
+  x > 5 ~ "medium",
+  x <= 5 ~ "small"
+)
+
+## We can also use `.default =` for when no conditions are met
+case_when(
+  x > 10 ~ "large",
+  x > 5 ~ "medium",
+  .default = "small"
+)
+
+## Pitfall: ordering the conditions poorly
+case_when(
+  x > 5 ~ "medium", 
+  x > 10 ~ "large",
+  .default = "small"
+)
+
+# Working within mutate: simple examples 
+
+## Example data
+sitetemps <- 
+  tibble(
+    site = c(2, 1, 2, 3, 3, 3, 1, 1, 2),
+    temp = c(-2.1, 38.6, 4.6, -0.2, 4.5, 0.6, 37.6, 36.7, 102.3)
+  ) |> 
+  print()
+
+## if_else within mutate
+sitetemps |> 
+  mutate(
+    metric = if_else(
+      condition = site == 1,
+      true = "F",
+      false = "C"
+    )
+  )
+
+## case_when within mutate
+sitetemps |> 
+  mutate(
+    nation = case_when(
+      site == 1 ~ "US",
+      site == 2 ~ "DE",
+      site == 3 ~ "FR",
+      .default = NA
+    )
+  )
+
+# Working within mutate: complex examples
+
+## Boolean logic in condition
+sitetemps |> 
+  mutate(
+    metric = if_else(site == 1, "F", "C"),
+    state = if_else(
+      condition = (metric == "F" & temp < 32) | (metric == "C" & temp < 0),
+      true = "solid",
+      false = "liquid"
+    )
+  )
+
+## Conditionally transforming values
+example |> 
+  mutate(
+    metric = if_else(site == 1, "F", "C"),
+    tempC = if_else(
+      condition = metric == "F",
+      true = (temp - 30) * (5 / 9), 
+      false = temp
+    ),
+    state = case_when(
+      tempC < 0 ~ "solid",
+      tempC < 100 ~ "liquid",
+      tempC > 100 ~ "gas"
+    )
+  )
+```
+
+
+# Custom Functions
+
+## Custom Functions {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   [Functions]{.b .blue} can be created by anyone
+    -   They can reduce repetition, errors, and time
+    -   The DRY (Don't Repeat Yourself) principle
+
+::: {.fragment .mt1}
+-   A function declaration has four parts
+    -   The function **name**
+    -   The **arguments** / input
+    -   The **body** / code
+    -   The **return** / output
+:::
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li vlkghpah trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Custom Functions Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+## Do it by hand
+
+score <- rnorm(100, mean = 100, sd = 15)
+df <- tibble(score)
+ggplot(df, aes(x = score)) + 
+  geom_histogram()
+
+# Create a function to make a histogram of a vector
+
+## function_name <- function(arguments) { 
+##   function_code
+##   print return value
+## }
+## return <- function_name(input)
+
+## Simple version with one argument (vector)
+
+fast_hist <- function(vector) {
+  df <- tibble(x = vector)
+  p <- ggplot(df, aes(x = x)) +
+    geom_histogram()
+  p
+}
+fast_hist(score)
+fast_hist(mpg$hwy)
+fast_hist(starwars$height)
+
+## Fancier version with two arguments (vector and fill_color)
+
+fast_hist <- function(vector, fill_color) {
+  df <- tibble(x = vector)
+  p <- ggplot(df, aes(x = x)) + 
+    geom_histogram(fill = fill_color)
+  p
+}
+
+fast_hist(score, fill_color = "lightblue")
+fast_hist(score, "lightblue")
+
+## Fancier version with default argument for fill_color
+
+fast_hist(score) # error: missing fill_color!
+
+fast_hist <- function(vector, fill_color = "thistle") {
+  df <- tibble(x = vector)
+  p <- ggplot(df, aes(x = x)) + 
+    geom_histogram(fill = fill_color)
+  p
+}
+
+fast_hist(score)
+fast_hist(score, fill_color = "lightblue")
+
+## Fancier version that passes on any extra arguments to the geom via ...
+
+fast_hist(score, fill_color = "lightblue", bins = 10) # error: what is bins?
+
+### Quick but rigid fix
+fast_hist <- function(vector, fill_color = "thistle", bins = bins) {
+  df <- tibble(x = vector)
+  p <- ggplot(df, aes(x = x)) + 
+    geom_histogram(fill = fill_color, bins = bins)
+  p
+}
+
+fast_hist(score, fill_color = "lightblue", bins = 10)
+
+### More flexible fix
+
+fast_hist <- function(vector, ...) {
+  df <- tibble(x = vector)
+  p <- ggplot(df, aes(x = x)) + 
+    geom_histogram(...)
+  p
+}
+
+fast_hist(score, fill = "white", color = "black", binwidth = 5)
+```
+
+
+# Basic Iteration
+
+## Basic Iteration {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   We often want to repeat any operation many times
+    -   `across()` repeats over many columns
+    -   What about repeating over many files?
+    
+::: {.fragment .mt1}
+-   Some functions can iterate over a vector of files
+    -   e.g., `read_csv()` can combine many files
+    -   We can get a list of files using `list.files()`
+
+:::
+
+::: {.fragment .mt1}
+-   For more flexibility, we make a custom function
+    -   Then we repeat that function using \{purrr\}
+    -   We usually use `map()` or `walk()`
+    
+:::
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li krmfspeu trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Basic Iteration Live Coding
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+
+library(tidyverse)
+
+set.seed(2023)
+
+df1 <- tibble(
+  day = 1:30,
+  mood = round(rnorm(30, mean = 5, sd = 1))
+)
+
+df2 <- tibble(
+  day = 1:30,
+  mood = round(rnorm(30, mean = 4, sd = 1))
+)
+
+df3 <- tibble(
+  day = 1:30,
+  mood = round(rnorm(30, mean = 4, sd = 2))
+)
+
+write_csv(df1, file = "data/pid_001.csv")
+write_csv(df2, file = "data/pid_002.csv")
+write_csv(df3, file = "data/pid_003.csv")
+```
+
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+## Find all files in a folder
+files <- list.files(
+  path = "data",
+  pattern = ".csv",
+  full.names = TRUE
+)
+files
+
+## Read in and combine all files (must have the same format)
+
+alldata <- read_csv(files, id = "file")
+alldata
+
+alldata2 <- 
+  alldata |> 
+  mutate(
+    pid = str_remove(file, "data/pid_"),
+    pid = str_remove(pid, ".csv")
+  )
+alldata2
+
+ggplot(alldata2, aes(x = day, y = mood)) +
+  facet_wrap(~pid) +
+  geom_line()
+
+## Or read in and do something to each file
+
+### Step 1: make a function to do that thing
+
+make_plot <- function(data_file, ...) {
+  df <- read_csv(data_file, show_col_types = FALSE)
+  
+  pid <- str_remove(data_file, "data/pid_")
+  pid <- str_remove(pid, ".csv")
+  
+  p <- ggplot(df, aes(x = day, y = mood)) +
+    geom_line() +
+    geom_point() +
+    labs(title = str_glue("Mood time series for Participant {pid}"))
+  
+  image_file <- str_glue("{pid}_mood.png")
+  
+  ggsave(file = image_file, plot = p, ...)
+  
+  p
+}
+
+### Step 2: Test that function on one of your files
+
+make_plot(data_file = "data/pid_001.csv", height = 4, width = 6, units = "in")
+
+### Step 3: Apply that function to each file using {purrr}
+
+#### Map will capture (and print) the return values in a list object
+map(.x = files, .f = make_plot, height = 4, width = 6, units = "in")
+
+### Walk will run the code but will discard the return values (no print)
+walk(.x = files, .f = make_plot, height = 4, width = 6, units = "in")
+```

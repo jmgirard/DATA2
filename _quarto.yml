@@ -1,0 +1,54 @@
+project:
+  type: website
+
+website:
+  title: "DATA2"
+  navbar:
+    background: primary
+    left:
+      - href: index.qmd
+        text: "Home"
+      - href: syllabus.qmd
+        text: "Syllabus"
+      - href: schedule.qmd
+        text: "Schedule"
+      - text: "Unit I"
+        menu:
+          - href: Unit_I/week_01.qmd
+            text: "Week 1: Overview"
+          - href: Unit_I/week_02.qmd
+            text: "Week 2: Overview"
+          - href: Unit_I/week_03.qmd
+            text: "Week 3: Program"
+          - href: Unit_I/week_04.qmd
+            text: "Week 4: Wrangle"
+          - href: Unit_I/week_05.qmd
+            text: "Week 5: Visualize"
+          - href: Unit_I/week_06.qmd
+            text: "Week 6: Communicate"
+          - href: Unit_I/project_I.qmd
+            text: "Unit I Project"
+      - text: "Unit II"
+        menu:
+          - href: Unit_II/week_10.qmd
+            text: "Week 10: Wrangle"
+          - href: Unit_II/week_11.qmd
+            text: "Week 11: Wrangle"
+          - href: Unit_II/week_12.qmd
+            text: "Week 12: Visualize"
+          - href: Unit_II/week_13.qmd
+            text: "Week 13: Program"
+          - href: Unit_II/week_14.qmd
+            text: "Week 14: Showcase"
+          - href: Unit_II/project_II.qmd
+            text: "Unit II Project"
+  page-footer: "Copyright 2023 &copy; Jeffrey Girard"
+          
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+execute:
+  freeze: auto

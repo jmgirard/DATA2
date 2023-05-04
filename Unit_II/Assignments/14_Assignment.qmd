@@ -1,0 +1,25 @@
+---
+title: "Week 14 Assignment"
+---
+
+![](../../img/programming_357EDD.svg){.hero}
+
+## Instructions
+
+Write a short essay answering each of the three questions below. Submit your answers on Canvas (as a text file, Word document, Quarto document, etc.).
+
+## Question 1
+
+One challenging aspect of learning new skills is retaining them over time. You have just invested three months of hard work into acquiring these skills and it will require motivation and sustained practice/use to keep this momentum going. List one or more possible benefits (e.g., to your career or person) of investing in retaining these skills, list one or more challenges that might get in the way of you retaining these skills, and list one or more strategies you could use to overcome these challenges. Note that you can get full credit for providing one of each, but you are welcome to expand beyond this if you think it would be worthwhile.
+
+## Question 2
+
+The material in this class is just the tip of the iceberg (i.e., the beginning) in terms of what can be learned about programming, wrangling, visualization, and other data science topics. List two topics (e.g., ideas/concepts or skills/tools) that you would like to learn more about and describe why they interest you. Then lay out a plan for how you might learn about these topics (e.g., sources of information, potential challenges, and potential solutions).
+
+## Question 3
+
+Find a video from one of the following playlists to watch that you find interesting (and is 10+ minutes in duration). Include the link to your selected video in your answer. Then write several sentences summarizing what you learned from the video and how you might use that new knowledge in your Unit II Project and/or in your data science adventures beyond this course.
+
+Posit Conference Talks:<br /> <https://www.youtube.com/playlist?list=PL9HYL-VRX0oTw-6TQri7Fr97G3IX0tHh8>
+
+Posit Demos + Tutorials:<br /> <https://www.youtube.com/playlist?list=PL9HYL-VRX0oTOK4cpbCbRk15K2roEgzVW>

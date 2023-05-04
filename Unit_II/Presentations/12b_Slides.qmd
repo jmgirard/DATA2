@@ -1,0 +1,302 @@
+---
+format: 
+  revealjs:
+    css: ../../styles.css
+    slide-number: true
+    show-slide-number: all
+    progress: true
+    history: true
+    hash-type: number
+    theme: default
+    code-block-background: true
+    highlight-style: zenburn
+    code-link: false
+    code-copy: true
+    pagetitle: "Foundations of Data Science"
+    author-meta: "Jeffrey Girard"
+    date-meta: "2023-04-05"
+    semester: "Spring 2023"
+    course: "399/800"
+    lecture: "12b"
+---
+
+::: {.my-title}
+# [Foundations of]{.my-subtitle}<br />[Data Science]{.blue}
+
+::: {.my-grey}
+[{{< meta semester >}} | Course {{< meta course >}}]{}<br />
+[Jeffrey M. Girard | Lecture {{< meta lecture >}}]{}
+:::
+
+![](../../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
+:::
+
+## Roadmap
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+1. Highlighting
+  
+2. Layouts
+
+3. Exporting
+
+4. Activity
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li xtkehzkm trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+# Highlighting
+
+## Highlighting {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   We often want to [emphasize]{.g .blue} a subset of objects
+    -   We could `filter()` these objects out...
+    -   ...and then plot them in a separate plot
+    -   But the context of the others can be helpful
+    
+::: {.fragment .mt1}
+-   To fix this, we can use the \{gghighlight\} package
+    -   We add `gghighlight()` to our ggplot
+    -   We give this function criteria for highlighting<br />
+        (just like we would for `filter()`)
+    -   Objects that meet criteria are highlighted
+    -   Objects that don't will "lose focus" (e.g., grey)
+:::
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li ibavrbsh trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Highlighting Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# HIGHLIGHTING
+library(gghighlight)
+
+## Original plot
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point(color = "blue") +
+  theme_classic()
+
+## Highlighting points
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point(color = "blue") +
+  gghighlight(cyl == 6) +
+  theme_classic()
+
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point(color = "darkgreen") +
+  gghighlight(displ < 3) +
+  theme_classic()
+
+ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
+  facet_wrap(~drv) +
+  geom_point() +
+  theme_classic()
+
+ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
+  facet_wrap(~drv) +
+  geom_point() +
+  gghighlight(label_key = drv) +
+  theme_classic()
+# can turn off "skip labeling" message with use_direct_label = FALSE
+
+## Highlighting bars
+ggplot(iris, aes(Sepal.Length, fill = Species)) +
+  geom_histogram() +
+  theme_classic()
+
+ggplot(iris, aes(Sepal.Length, fill = Species)) +
+  geom_histogram() +
+  facet_wrap(~Species) +
+  theme_classic()
+
+ggplot(iris, aes(Sepal.Length, fill = Species)) +
+  geom_histogram() +
+  facet_wrap(~Species) +
+  gghighlight(label_key = Species) +
+  theme_classic()
+```
+
+
+# Layouts
+
+## Layouts {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   We may want to combine multiple plots into one
+    -   e.g., for communication and publishing
+    -   e.g., to compare/contrast several plots
+    -   e.g., to combine related "subfigures"
+    -   e.g., to create complex figure layouts
+
+::: {.fragment .mt1}
+-   To do so, we can use the \{patchwork\} package
+    -   This redefines the `+`, `|`, `\` operators
+    -   We use these to combine ggplot objects
+    -   We can control layout and annotations
+:::
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li joeivjls trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Layouts Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+#install.packages("patchwork")
+library(patchwork)
+
+# Create example plots
+p1 <- ggplot(mpg, aes(x = displ)) + geom_histogram(bins = 10) + 
+  labs(x = "Engine Displacement", y = NULL)
+p2 <- ggplot(mpg, aes(x = hwy)) + geom_histogram(bins = 10) + 
+  labs(x = "Highway MPG", y = NULL)
+p3 <- ggplot(mpg, aes(x = displ, y = hwy)) + geom_point() +
+  labs(x = "Engine Displacement", y = "Highway MPG")
+p4 <- ggplot(mpg, aes(x = displ, y = hwy)) + geom_smooth() +
+  labs(x = "Engine Displacement", y = "Highway MPG")
+
+# Combine plots
+p1 + p2
+
+# Control the layout
+p1 + p2 + plot_layout(ncol = 2)
+p1 + p2 + plot_layout(nrow = 2)
+
+# Expand to three plots
+p1 + p2 + p3
+
+# Controlling the layout
+p1 + p2 + p3 + plot_layout(ncol = 3)
+p1 + p2 + p3 + plot_layout(nrow = 3)
+p1 + p2 + p3 + plot_layout(ncol = 2, nrow = 2)
+
+# Adding spacers to layout
+p1 + p2 + plot_spacer() + p3 + plot_layout(ncol = 2, nrow = 2)
+
+p1 + plot_spacer() + p2 + plot_spacer() + p3 + plot_spacer() + 
+  plot_layout(ncol = 3, nrow = 2)
+
+# Layout plots side-by-side
+p1 | p2
+p1 | p2 | p3
+
+# Combine plots above-and-below
+p1 / p2
+p1 / p2 / p3
+
+# Mix and Match with Parentheses
+(p1 | p2) / p3
+(p1 / p2) | p3
+
+# Use spacers with explicit layout
+(p1 | plot_spacer() | p2) / (plot_spacer() | p3 | plot_spacer())
+
+# Change the relative size of columns/rows
+p1 + p3 + p2 + p4 + plot_layout(widths = c(1, 2))
+p1 + p2 + p3 + p4 + plot_layout(heights = c(1, 2))
+
+# Add labels to overall plot
+((p1 / p2) | p3) + plot_annotation(
+  title = "Overall title",
+  caption = "Data from fueleconomy.gov"
+)
+
+# Automated plot annotation
+((p1 / p2) | p3) + plot_annotation(tag_levels = "a")
+((p1 / p2) | p3) + plot_annotation(tag_levels = "1")
+((p1 / p2) | p3) + plot_annotation(tag_levels = "a", tag_suffix = ")")
+```
+
+
+# Exporting
+
+## Exporting {.smaller}
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+-   `ggsave()` exports ggplots to files
+    -   We control the exact size and format
+    
+::: {.fragment .mt1}
+-   [Raster]{.b .blue} ([png]{.b}, jpg, bmp, tif): Compatibility
+
+    
+::: {.mt1}
+-   [Vector]{.b .blue} ([pdf]{.b}, svg, wmf, eps): Scalability
+:::
+
+![](../../img/formats.png)
+
+:::
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li amfaktum trigger=loop delay=3000 colors=primary:#2a76dd class=rc >}}
+:::
+
+:::
+
+## Exporting Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+p <- ggplot(mpg, aes(x = displ, y = hwy)) + geom_smooth() +
+  labs(x = "Engine Displacement", y = "Highway MPG")
+p
+
+# Save a specific ggplot object to a file
+ggsave(filename = "pfinal.png", plot = p)
+
+# Specify the size of the file to save
+ggsave(filename = "pfinal2.png", plot = p, 
+       width = 6, height = 3, units = "in")
+#open file and zoom in
+
+# Many file formats are available (raster and vector)
+ggsave(filename = "pfinal2.pdf", plot = p, 
+       width = 6, height = 3, units = "in")
+#open file and zoom in
+
+# Creating a very large image may result in small text however
+ggsave(filename = "p_poster.png", plot = p, 
+       width = 12, height = 8, units = "in")
+
+# You can quickly increase the text size using theme_*(base_size)
+p2 <- p + theme_grey(base_size = 24)
+ggsave(filename = "p_poster2.png", plot = p2,
+       width = 12, height = 8, units = "in")
+```

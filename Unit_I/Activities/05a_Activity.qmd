@@ -1,0 +1,162 @@
+---
+title: "Lecture [05a] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1
+
+For each of the following code snippets, find and fix the error(s).
+
+a) "The Scatterbrained Scatterplot"
+
+```{r}
+#| eval: false
+#| error: true
+
+ggplot(mpg, x = displ, y = hwy) + 
+  geom_point()
+```
+
+b) "Not-so-smooth Smoothing"
+
+```{r}
+#| eval: false
+#| error: true
+
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point()
+  geom_smooth(shape = "triangle")
+```
+
+c) "A Leaky Pipeline"
+
+```{r}
+#| eval: false
+#| error: true
+
+ggplot(economics, aes(x = date, y = unemploy)) |> 
+  geom_point()
+```
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Part (a)**
+
+The code forgot to put the mappings inside `aes()`.
+
+```{r}
+#| message: false
+
+library(tidyverse)
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() 
+```
+
+**Part (b)**
+
+The code tried to set the shape aesthetic for the wrong geom (smooths don't have shapes).
+
+```{r}
+#| message: false
+
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point(shape = "triangle") +
+  geom_smooth()
+```
+
+**Part (c)**
+
+The code used pipes instead of plus signs to connect ggplot2 commands.
+
+```{r}
+ggplot(economics, aes(x = date, y = unemploy)) +
+  geom_point()
+```
+
+</blockquote></details></p>
+
+
+## Question 2
+
+a) Install and load the \{palmerpenguins\} package.
+
+b) Recreate the following graphic as closely as you can from the `penguins` tibble in that package (don't worry about getting the point size exactly right).
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# install.packages(palmerpenguins)
+library(palmerpenguins)
+ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 2)
+```
+
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+
+# Extra pane > Packages tab > Install button > palmerpenguins > Install
+# Or, in console: install.packages(palmerpenguins)
+
+library(palmerpenguins)
+```
+
+**Answer (b)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 2)
+```
+
+</blockquote>
+</details></p>
+
+
+## Question 3
+
+Create a plot from the following text description. Take the `penguins` dataset (from Question 2) and create a scatterplot where penguins with higher body mass are further to the right on the plot and penguins with higher bill depth are higher on the plot. Color each point based on which island that penguin was observed at and add a smoothing line to show the relationship between body mass and bill depth for each island.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| message: false
+#| warning: false
+
+ggplot(penguins, aes(x = body_mass_g, y = bill_depth_mm, color = island)) + 
+  geom_point() +
+  geom_smooth()
+```
+
+</blockquote></details></p>
+
+
+## Fun Stuff
+
+Would these jokes be more or less funny if he had used \{ggplot2\}?
+
+{{< video https://www.youtube.com/embed/LYE3GtXqDV0 >}}
+
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

@@ -1,0 +1,567 @@
+---
+format: 
+  revealjs:
+    css: ../../styles.css
+    slide-number: true
+    show-slide-number: all
+    pdf-max-pages-per-slide: 1
+    progress: true
+    history: true
+    hash-type: number
+    navigation-mode: linear
+    controls: true
+    theme: default
+    code-block-background: true
+    highlight-style: zenburn
+    code-link: false
+    code-copy: true
+    pagetitle: "Foundations of Data Science"
+    author-meta: "Jeffrey Girard"
+    date-meta: "2023-01-17"
+---
+
+::: {.my-title}
+# [Foundations of]{.my-subtitle} <br />[Data Science]{.blue}
+
+::: {.my-grey}
+[Spring 2023 | Course 399/800]{}<br />
+[Jeffrey M. Girard | Lecture 01b]{}
+:::
+
+![](../../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
+:::
+
+
+## Roadmap
+
+::: {.columns .pv4}
+
+::: {.column width="60%"}
+1. Syllabus Review
+  
+2. Course Modules
+
+3. Course Website
+
+4. Activity
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li xtkehzkm trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+
+# Syllabus Review
+
+## Instructor Information {.smaller}
+
+::: {.columns}
+::: {.column width="30%"}
+::: {.tc}
+![](../../img/Girard_500x500.jpg){.br-100}
+
+**Jeffrey Girard**, PhD<br /> 
+[affcom.ku.edu/girard](https://affcom.ku.edu/girard)<br /> 
+[jmgirard\@ku.edu](mailto:jmgirard@ku.edu)<br />
+Fraser Hall 454
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="60%"}
+::: {.fragment}
+#### Background
+
+-   [Assistant Professor]{.b .green}, *Department of Psychology*
+-   Brain, Behavior, and Quantitative Science
+-   Clinical Psychological Science
+:::
+::: {.fragment .mt1}
+#### Research Areas
+
+-   Affective Computing
+-   Psychological Assessment
+-   Interpersonal Communication
+-   Applied Statistics and Machine Learning
+-   [Data Science]{.b .green} and Software Engineering
+:::
+:::
+:::
+
+::: {.footer}
+Office Hours: Fridays 12:00–1:00pm and 2:00–3:00pm
+:::
+
+
+## Teaching Assistant Information {.smaller}
+
+::: {.columns}
+::: {.column width="30%"}
+::: {.tc}
+![](../../img/Adaryukov.jpg){.br-100}
+
+**James Adaryukov**, MS<br /> 
+[behave.ku.edu/people](https://behave.ku.edu/people/)<br /> 
+[jadaryukov\@ku.edu](mailto:jadaryukov@ku.edu)<br />
+Fraser Hall 534
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="60%"}
+::: {.fragment}
+#### Background
+
+-   [PhD Student]{.b .green}, *Department of Psychology*
+-   Brain, Behavior, and Quantitative Science
+-   Behavioral Science Lab
+:::
+::: {.fragment .mt1}
+#### Research Areas
+
+-   Predicting Decision-Making
+-   Social Information
+-   Social Pressure
+-   Natural Language Processing
+-   Statistics and [Data Science]{.b .green}
+
+:::
+:::
+:::
+
+::: {.footer}
+Office Hours: Thursdays 1:00–3:00pm
+:::
+
+
+## Course Information {.smaller}
+
+#### Data 2: Foundations of Data Science
+
+- PSYC/POLS/ECON 399 (~20 students)
+
+- Undergraduate Certificate in Data Science
+
+- Lectures, Activities, and Assignments
+
+- [Group Projects]{.b .green} (basic to intermediate)
+
+#### Data Science in the Social & Behavioral Sciences
+
+- PSYC 792/800 (~10 students)
+
+- Graduate Programs in Social/Behavioral Science
+
+- Lectures, Activities, and Assignments
+
+- [Individual Projects]{.b .green} (intermediate to advanced)
+
+
+## Learning Objectives {.smaller}
+
+1. Learn fundamental skills underlying data science
+
+2. Prepare students for research and industry jobs
+
+3. Instill a sense of mastery, curiosity, and fun
+
+::: {.columns .fragment}
+::: {.column}
+#### What you will learn here
+
+- Techniques that are widely applicable
+
+- Intermediate programming (R, Quarto)
+
+- Intermediate wrangling (tidyverse)
+
+- Intermediate visualization (ggplot2)
+
+- Intermediate data communication
+:::
+
+::: {.column}
+#### What you won't learn here
+
+- Techniques that are highly specialized
+
+- Statistical and machine learning modeling
+
+- Web scraping, version control, or SQL
+
+- Advanced data science techniques
+
+- Advanced data communication
+:::
+:::
+
+
+## Course Format {.smaller}
+
+#### Class Meetings (2/week, 20 total)
+- Three-part lecture with conceptual intros and live coding
+- In-class activity (with answer key) to practice new skills
+
+#### Homework Assignments (1/week, 10 total)
+- Six multi-part questions to apply your new skills
+- Demonstrate your understanding in controlled conditions
+
+#### Unit Projects (1/unit, 2 total)
+- Apply your new skills to real-world data you care about
+- Challenge yourself to learn new things and specialize
+
+
+## Course Materials {.smaller}
+
+No required textbooks or readings. However, this course was heavily inspired by the following book, which you can access for free online (or pay to order a physical copy):
+
+- [R for Data Science (1st Edition)](https://r4ds.had.co.nz/) by Wickham & Grolemund
+
+The following texts are where I would recommend you turn after completing this course (or during it, if you are feeling ambitious) to dive into more advanced topics about visualization and programming, respectively.
+
+- [ggplot2: Elegent graphics for data analysis (3rd Edition)](https://ggplot2-book.org/) by Wickham
+
+- [Advanced R (2nd Edition)](https://adv-r.hadley.nz/) by Wickham
+
+
+## Grading Policies {.smaller}
+
+#### Graded Components
+
+- 60\% [Homework Assignments]{.b .green} (6\% each $\times$ 10)
+
+- 40\% [Unit Projects]{.b .green} (20\% each $\times$ 2)
+
+#### Grading Scale
+
+| Letter    | A   | A−  | B+  | B   | B−  | C+  | C   | C−  | D+  | D   | D−  |
+|-----------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| G. Points | 4.0 | 3.7 | 3.3 | 3.0 | 2.7 | 2.3 | 2.0 | 1.7 | 1.3 | 1.0 | 0.7 |
+| Threshold | 93% | 90% | 87% | 83% | 80% | 77% | 73% | 70% | 67% | 63% | 60% |
+
+::: {.footer}
+Note that I am unlikely to provide extra credit opportunities.
+:::
+
+
+## University Policies {.smaller}
+#### Accommodations
+- Please contact me and the [Student Access Center](https://access.ku.edu)
+
+#### Academic Misconduct
+- Disruption, threatening, cheating, plagiarism, falsification, etc.
+
+- May affect students' grades on specific work and/or overall
+
+#### Commercial Note-Taking
+- Not permitted in any course at University of Kansas
+
+#### Diversity and Inclusion
+- Respect each others' backgrounds, perspectives, and identities
+
+
+## Course Policies {.smaller}
+#### Attendance
+- In-person attendance is strongly encouraged but not required
+
+- Video recordings will be attempted but cannot be guaranteed
+
+#### Late Submissions
+- May receive reduced credit at instructor's discretion
+
+- I prefer high-quality work a day late over poor-quality work on time
+
+#### Group Projects
+- Projects will have group and individual components (for 399 only)
+
+- Group members may receive different grades (based on contributions)
+
+<!-- Course Modules -->
+
+# Course Modules
+
+## Unit I Overview
+
+- Introduction to R
+
+- Basic Programming
+
+- Basic Wrangling
+
+- Basic Visualization
+
+- Basic Communication
+
+- Unit I Project
+
+
+## Weeks 1–2 {.smaller}
+
+#### Introduction to Course
+
+- \[01a\]: No Class (Holiday)
+
+- \[01b\]: Course Overview (Syllabus / Modules / Canvas)
+
+- Due: Pre-course Survey
+
+#### Introduction to R
+
+- \[02a\]: Course Software (R / RStudio / Files)
+
+- \[02b\]: Communicating with R (Console / Scripts / Quarto)
+
+- Due: Week 02 Assignment
+
+
+## Weeks 3–4 {.smaller}
+
+#### Basic Programming
+
+- \[03a\]: Basic Programming (Assignment / Naming / Functions)
+
+- \[03b\]: More Programming (Vectors / Strings / Packages)
+
+- Due: Week 03 Assignment
+
+#### Basic Wrangling
+
+- \[04a\]: Tidy Data (Principles / Tibbles / Importing)
+
+- \[04b\]: dplyr Basics (Column verbs / Row verbs / Pipelines)
+
+- Due: Week 04 Assignment
+
+
+## Weeks 5–6 {.smaller}
+
+#### Basic Visualization
+
+- \[05a\]: ggplot2 Basics (Principles / Scatterplots / Aesthetics)
+
+- \[05b\]: More ggplot2 (Variation / Covariation / Layering)
+
+- Due: Week 05 Assignment
+
+#### Basic Communication
+
+- \[06a\]: Program to Communicate (Style / Comments / Markdown)
+
+- \[06b\]: Visualize to Communicate (Labels / Annotations / Scales)
+
+- Due: Week 06 Assignment
+
+
+## Weeks 7–8 {.smaller}
+
+#### Unit I Project
+
+- \[07a\]: In-class planning
+
+- \[07b\]: In-class work
+
+- Due: Unit I Project Plan
+
+#### Unit I Project
+
+- \[08a\]: In-class work
+
+- \[08b\]: In-class work
+
+- Due: Unit I Project Document & Report
+
+
+## Unit II Overview
+
+- Spring Break
+
+- Intermediate Wrangling
+
+- Intermediate Visualization
+
+- Intermediate Programming
+
+- Intermediate Communication (?)
+
+- Unit II Project
+
+
+## Weeks 9–10 {.smaller}
+
+#### Spring Break
+
+- \[09a\]: No Class (Break)
+
+- \[09b\]: No Class (Break)
+
+- Due: *NA*
+
+#### Intermediate Wrangling
+
+- \[10a\]: Summarization (Summarize / Grouped Summarize / Grouped Mutate)
+
+- \[10b\]: Convenience (Tidy Selection / Across / Rowwise)
+
+- Due: Week 10 Assignment
+
+
+## Weeks 11–12 {.smaller}
+
+#### Intermediate Wrangling
+
+- \[11a\]: Reshaping Data (Separate / Unite / Pivot)
+
+- \[11b\]: Joining Data (Relational Data / Basic Joins / dplyr Joins)
+
+- Due: Week 11 Assignment
+
+#### Intermediate Visualization
+
+- \[12a\]: Customization (Themes / Layouts / Exporting)
+
+- \[12b\]: Advanced Elements (Facets / Stats / Positions)
+
+- Due: Week 12 Assignment
+
+
+## Weeks 13–14 {.smaller}
+
+#### Intermediate Programming
+
+- \[13a\]: Special Data Types (Strings / Factors / Dates and times)
+
+- \[13b\]: Automation (Control Flow / Custom Functions / Iteration)
+
+- Due: Week 13 Assignment
+
+#### Intermediate Communication
+
+- \[14a\]: Presentations (RevealJS) (?)
+
+- \[14b\]: Publications (papaja) (?)
+
+- Due: Week 14 Assignment
+
+
+## Weeks 15–16 {.smaller}
+
+#### Unit II Project
+
+- \[15a\]: In-class planning
+
+- \[15b\]: In-class work
+
+- Due: Unit II Project Plan
+
+#### Unit II Project
+
+- \[16a\]: In-class work
+
+- \[16b\]: In-class work
+
+- Due: Unit II Project Document & Report
+
+
+<!-- Course Website -->
+
+# Course Website
+
+## Accessing Canvas
+
+#### Website
+
+- \[399\]: <https://canvas.ku.edu/courses/85050>
+
+- \[792\]: <https://canvas.ku.edu/courses/86086>
+
+#### Mobile App
+
+- iOS: [Canvas Student on the App Store](https://apps.apple.com/us/app/canvas-student/id480883488)
+
+- Android: [Canvas Student on the Google Play Store](https://play.google.com/store/apps/details?id=com.instructure.candroid)
+
+## Home Page {.smaller}
+
+Shows the course syllabus and a student-specific To Do list
+
+::: {.canvas_ss}
+![](../../img/canvas_home.png)
+:::
+
+## Modules Page {.smaller}
+
+Shows links to each lecture and assignment, organized by unit and week
+
+::: {.canvas_ss}
+![](../../img/canvas_modules.png)
+:::
+
+## Submitting Assignments {.smaller}
+
+Upload an HTML file (created using Quarto) for each assignment
+
+::: {.canvas_ss}
+![](../../img/canvas_submit.png)
+:::
+
+## Grades Page {.smaller}
+
+Grades on each assignment will be displayed here
+
+::: {.canvas_ss}
+![](../../img/canvas_grades1.png)
+:::
+
+## Grades Page {.smaller}
+
+Scroll down to see grades per type and overall
+
+::: {.canvas_ss}
+![](../../img/canvas_grades2.png)
+:::
+
+<!-- Activity -->
+
+# Activity
+
+## Icebreakers {.smaller}
+
+::: {.columns}
+
+::: {.column width="60%"}
+Break into small groups of 4–5...
+
+1. What is your **preferred name**?
+
+2. What is your **year** and **major** / department?
+
+3. What **academic topics** and questions excite you?
+
+4. What **career path(s)** are you considering?
+
+::: {.fragment}
+5. What was your **preferred name** again?
+
+6. Where did you grow up / what is your **home town**?
+
+7. What are your **non-academic interests** / hobbies?
+
+8. What is your **favorite plant or animal** and why?
+:::
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li limsgwpx trigger=loop delay=5000 colors=secondary:#2a76dd class=rc >}}
+:::
+
+:::
+
+::: {.footer}
+If there's time, shuffle the groups and repeat.
+:::

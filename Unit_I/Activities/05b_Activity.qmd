@@ -1,0 +1,139 @@
+---
+title: "Lecture [05b] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1 (Variation)
+
+Load the \{palmerpenguins\} package (after installing it, if you haven't already) to gain access to the `penguins` dataset.
+
+a) Create a visualization to depict the number of penguins from each `species` observed in the dataset. To match the penguin color scheme, make your bars white with thick black borders. Which species was least commonly observed? 
+
+b) Create a visualization to depict the distribution of the penguins' observed body mass (`body_mass_g`). You can choose whether to use a histogram or density plot. What were some common values of body mass for the observed penguins?
+
+c) Using a tool from last week, filter the data to only include *female* penguins and then use it to repeat part (b). Does this plot look different than it did before?
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Part (a)**
+
+```{r}
+#| message: false
+library(tidyverse)
+library(palmerpenguins)
+ggplot(penguins, aes(x = species)) + 
+  geom_bar(fill = "white", color = "black", linewidth = 2)
+```
+
+The chinstrap species was the least commonly observed.
+
+**Part (b)**
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g)) + 
+  geom_density(linewidth = 2, fill = "white")
+```
+
+Most of the penguins were around 3500 g, but the masses ranged from a bit below 3000 to a bit above 6000.
+
+**Part (c)**
+
+```{r}
+penguinsF <- penguins |> filter(sex == "female")
+ggplot(penguinsF, aes(x = body_mass_g)) + 
+  geom_density(linewidth = 2, fill = "white")
+```
+
+Yes, it has two humps (i.e., common values) now: around 3500 and around 4750. We call this shape a "bimodal" distribution.
+
+</blockquote></details></p>
+
+## Question 2 (Covariation)
+
+Use the unfiltered `penguins` dataset to answer these questions as well.
+
+a) Use the boxplot geom to depict the distribution of penguins' body mass by species. Which species is the most massive?
+
+b) Use the density geom to depict the distribution of penguins' body mass by sex. Does there appear to be a sex difference in the body mass distributions?
+
+c) Create a visualization to depict which penguin species were observed the most (and the least) at each island. Which species was observed across the highest number of islands?
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Part (a)**
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g, y = species)) + geom_boxplot()
+```
+
+The Gentoo species have the highest body mass distribution.
+
+**Part (b)**
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g, color = sex)) + 
+  geom_density(linewidth = 1)
+```
+
+The male distribution seems shifted higher relative to the female distribution, though the two overlap.
+
+**Part (c)**
+
+```{r}
+ggplot(penguins, aes(x = species, y = island)) + 
+  geom_jitter(width = 0.25, height = 0.25)
+```
+
+The Adelie species was the only one observed at all three islands.
+
+</blockquote></details></p>
+
+## Question 3 (Layering)
+
+Use the `mpg` dataset (included in \{tidyverse\}) to answer these questions.
+
+a) Create a scatterplot to depict the relationship between engine size (`displ`) and highway fuel efficiency (`hwy`).
+
+b) Modify your plot from part (a) to add a reference line to this plot showing where highway fuel efficiency equals 25 miles per gallon; make the line orange, 1mm thick, and displayed behind/below the points.
+
+c) Finally, modify your plot from part (b) to randomly push each point a small amount. This will make it easier to see when there are multiple overlapping points, i.e., cars with the same engine size and highway fuel efficiency.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Part (a)**
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()
+```
+
+**Part (b)**
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_hline(yintercept = 25, color = "orange", linewidth = 1) +
+  geom_point()
+```
+
+**Part (c)**
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_hline(yintercept = 25, color = "orange", linewidth = 1) +
+  geom_jitter()
+```
+
+Jittering can be helpful for continuous variables too! Consider this whenever you have overlapping points.
+
+
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

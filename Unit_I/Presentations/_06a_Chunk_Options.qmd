@@ -1,0 +1,111 @@
+````{verbatim, lang = "qmd"}
+#| echo: true
+
+# Suppress messages
+```{r}
+library(tidyverse)
+```
+
+```{r}
+#| message: false
+
+library(tidyverse)
+```
+
+# Suppress warnings
+
+```{r}
+library(palmerpenguins)
+ggplot(penguins, aes(x = body_mass_g)) + geom_histogram()
+```
+
+```{r}
+#| message: false
+
+library(palmerpenguins)
+ggplot(penguins, aes(x = body_mass_g)) + geom_histogram()
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+library(palmerpenguins)
+ggplot(penguins, aes(x = body_mass_g)) + geom_histogram()
+```
+
+# Include code but don't run it
+```{r}
+1 + 2
+```
+
+```{r}
+#| eval: false
+
+1 + 2
+```
+
+# Hide code but still run it
+```{r}
+1 + 2
+```
+
+```{r}
+#| echo: false
+
+1 + 2
+```
+
+# Include a chunk with an error in it
+```{r}
+mean()
+```
+
+```{r}
+#| error: true
+
+mean()
+```
+
+# Fold code for more compact output
+`#| code-fold: true` or `#| code-fold: show`
+
+```{r}
+#| code-fold: true
+
+pi * 10^2
+```
+
+# Collapse output into the code block
+
+```{r}
+#| collapse: true
+
+pi * 10^2
+```
+
+# Control figure size
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()
+```
+
+```{r}
+#| fig-width: 10
+#| fig-height: 5
+
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()
+```
+
+# Name a chunk
+```{r setup}
+library(tidyverse)
+```
+
+# Cache (save) a slow chunk
+```{r diamondsplot}
+#| cache: true
+
+ggplot(diamonds, aes(x = carat, y = price)) + geom_point()
+```
+
+````

@@ -1,0 +1,29 @@
+---
+title: "DATA2: Foundations of Data Science"
+subtitle: "[PSYC/ECON/POLS 399] Spring 2023"
+---
+
+## Overview
+
+As the social and behavioral sciences become increasingly infused with technology and research samples become increasingly large and complex, proficiency in working with computers and electronic data is becoming more and more necessary for researchers at all career stages. In this course, students will gain confidence and mastery over fundamental skills in computer programming, task automation, and the management, visualization, and communication of data. By the end of the course, students will have a strong foundation of conceptual knowledge about these topics, as well as practical experience using the R software environment. This course is designed for undergraduate students who want to pursue careers that work heavily with data.
+
+## Course Information
+
+### Instructor
+
+[Dr. Jeffrey Girard](https://affcom.ku.edu/girard), Assistant Professor, Department of Psychology, University of Kansas<br />
+**Email:** [jmgirard@ku.edu](mailto:jmgirard@ku.edu)<br />
+**Office:** Fraser 454<br />
+**Office Hours:** F 12:00-1:00pm, 2:00-3:00pm CT
+
+### Teaching Assistant
+
+James Adaryukov, PhD Student, Department of Psychology, University of Kansas<br />
+**Email:** [jadaryukov@ku.edu](mailto:jadaryukov@ku.edu)<br />
+**Office:** Fraser 534<br />
+**Office Hours:** Th 1:00-3:00pm CT
+
+### Classroom
+
+Room 547, Fraser Hall, [1415 Jayhawk Blvd, Lawrence, KS](https://goo.gl/maps/CoYxb4qtFJxBMkHv8)<br />
+**Lectures:** MW 9:00-10:50am CT

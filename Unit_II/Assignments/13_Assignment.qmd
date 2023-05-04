@@ -1,0 +1,141 @@
+---
+title: "Week 13 Assignment"
+---
+
+![](../../img/programming_357EDD.svg){.hero}
+
+## Instructions
+
+*Create a new Quarto document (HTML format), clear out the boilerplate code/text, and use this document to store your answers to each of the six questions below. Be sure to enable `embed-resources` using the header below. If your answer involves writing text, then use markdown to write 2--4 sentences per question; if you answer involves running code, then use one or more code chunks. For questions that ask you to fix code, correct any errors (while achieving the stated goal) and include only the working code in your document.*
+
+```markdown
+---
+format: 
+  html:
+    embed-resources: true
+---
+```
+
+*Please clearly mark which part of your document is answering which question (e.g., using markdown headings) and remove any "scratch work" or failed attempts from your document before submitting it. Finally, note that many essay-style questions will require you to read between the lines and use your imagination (as opposed to just looking up the answer in the lecture).*
+
+
+## Question 1
+
+a) Help me fix my code! I want to let R know that, even though my data is numerical, it is actually categorical with three possible categories: A, B, and C.
+
+```{r, renv.ignore=TRUE}
+#| error: true
+
+group_letter <- factor(c(1, 3, 2, 1), levels = c("A", "B", "C"))
+group_letter
+```
+
+b) Look at the output below and recreate it using R.
+
+```{r, renv.ignore=TRUE}
+#| eval: false
+
+???
+```
+
+```{r}
+#| echo: false
+
+factor(c(3, 3, 2, 3, 2), levels = c(1, 2, 3), labels = c("Small", "Medium", "Large"), ordered = TRUE)
+```
+
+
+## Question 2
+
+a) Summarize the `mpg` tibble to calculate the average `hwy` fuel efficiency for each `class` of car. Then use this summary tibble to create a ggplot where `hwy` is mapped to x, `class` is mapped to y, and a column geom is added.
+
+b) Reorder the columns such that the longer ones (i.e., those with the highest fuel efficiency) are on top.
+
+<p><details><summary>Hint</summary><blockquote>
+Your answer to part (d) should look like this:
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+
+mpg |> 
+  summarize(
+    .by = class,
+    hwy = mean(hwy)
+  ) |> 
+  ggplot(aes(x = hwy, y = fct_reorder(class, hwy))) + geom_col() +
+  labs(x = "Highway Fuel Efficiency", y = "Class")
+```
+</blockquote></details></p>
+
+
+## Question 3
+
+Download the `movies2021.csv` file from Canvas and read it into R. Use it to complete the following steps:
+
+a) Add a new column called `date` that parses the `Release_Date` character variable as a date variable (using \{lubridate\})
+
+b) Add a new column called `year` that extracts the year from the new `date` variable as a numeric variable (using \{lubridate\})
+
+c) Create a new column called label that combines strings from the tibble in the following format:
+    "Title (year) [language]" such as "COVID-21: Lethal Virus (2021) [en]"
+
+d) Select the `label` and `Vote_Average` variables and print the resulting tibble
+
+<p><details><summary>Hint</summary><blockquote>
+Your answer to part (d) should look like this:
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+read_csv("../../data/movies2021.csv", show_col_types = FALSE) |> 
+  mutate(
+    date = mdy(Release_Date),
+    year = year(date),
+    label = str_c(Title, " (", year, ") [", Original_Language, "]")
+  ) |> 
+  select(label, Vote_Average)
+```
+
+Remember that you can combine both character vectors and strings in `str_c()`. For example, try `str_c("I love ", fruit, " because ", fruit, " is delicious!")`. Use this same strategy to create the desired formatting in part (c). Or, if you prefer, use `str_glue()`.
+
+</blockquote></details></p>
+
+
+## Question 4
+
+a) Use the `case_when()` function to add a new variable called `age_stage` to the `gss_cat` tibble (included in \{tidyverse\}) that equals "early adult" when `age` is 18 to 34, "middle adult" when age is 35 to 64, and "late adult" when age is 65 or above.
+
+b) Use the `fct_collapse()` function to collapse the `marital` factor from `gss_cat` into a new factor called `married` with the following three levels: "Never" (Never Married), "Previously" (Separated, Divorced, Widowed), and "Currently" (Married).
+
+
+## Question 5
+
+a) Help me fix my code! I want to create a function that transforms my `x` vector by centering it (i.e., subtracting its mean) and normalizing it (i.e., dividing it by a constant value `y`). This is useful for some statistical analyses...
+
+```{r, renv.ignore=TRUE}
+#| error: true
+
+my_function <- function(x) {
+  (x - mean(x)) / y
+}
+my_function(x = c(10, 20, 5, 8), y = 3)
+```
+
+b) To the fixed function from part (a), add a default value to the `y` argument that is equal to the standard deviation of `x`. (*Hint:* Default values don't have to be a single constant value; they can be calculated from other arguments.)
+
+
+## Question 6
+
+a) Why might a data scientist create their own custom function? Provide an example of a time when you might write a custom function in your own work (you can just describe it, no need to include the actual code).
+
+b) Why do we need the functions from \{purrr\} if we already know how to use `across()`? Provide an example of a time when you might use `map()` or `walk()` in your own work (you can just describe it, no need to include the actual code).
+
+
+---
+
+✅ Done! *Please save and then render your document to an HTML file. Check it over to make sure it is complete (and rendered properly) and then upload this file to Canvas by the deadline listed on the syllabus. Note that, if any of your code chunks has an error in it, the HTML file will not render properly (this is why removing scratch work is important).*

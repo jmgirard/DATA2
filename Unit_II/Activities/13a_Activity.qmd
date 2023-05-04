@@ -1,0 +1,97 @@
+---
+title: "Lecture [13a] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1
+
+Mutate the following tibble to add a new column named `username` which combines the first letter of `fname`, a period, and then the first six letters of `lname` all in lowercase (such that the first username is "a.smith").
+
+```{r}
+#| message: false
+
+library(tidyverse)
+df <- tibble(
+  fname = c("Ann", "Benjamin", "Charlotte", "Dennis"),
+  lname = c("Smith", "Cooper", "Spelling", "Trakand")
+)
+```
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+df |> 
+  mutate(
+    username = str_to_lower(
+      str_c(
+        str_sub(fname, start = 1, end = 1), 
+        str_sub(lname, start = 1, end = 6), 
+        sep = "."
+      )
+    )
+  )
+```
+
+</blockquote></details></p>
+
+## Question 2
+
+Start with the `mpg` tibble (from \{tidyverse\}) and add a new variable called `parent` that collapses the levels of the `manufacturer` variable that are owned by the same parent company. Note that Volkswagen owns "volkswagen" and "audi", GMC owns "chevrolet" and "pontiac", Stellantis owns "dodge" and "jeep", Tata owns "land rover", and Ford owns "ford", "lincoln", and "mercury". Finally, select the `parent`, `manufacturer`, and `model` variables.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+mpg |> 
+  mutate(
+    parent = fct_collapse(
+      manufacturer, 
+      volkswagen = c("volkswagen", "audi"),
+      gmc = c("chevrolet", "pontiac"),
+      stellantis = c("dodge", "jeep"),
+      tata = "land rover",
+      ford = c("ford", "lincoln", "mercury")
+    )
+  ) |> 
+  select(parent, manufacturer, model)
+```
+
+</blockquote></details></p>
+
+## Question 3
+
+*The Wheel of Time* book series spans fourteen novels. Imagine that I used webscraping to extract the publication dates of the first and last books in the series from Wikipedia and stored them in the following two strings.
+
+```{r}
+first_book_str <- "15 January 1990"
+last_book_str <- "January 8, 2013"
+```
+
+Use \{lubridate\} and these strings to calculate (a) the number of days and (b) the number of years between these two publication dates.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+first_book_date <- dmy(first_book_str)
+last_book_date <- mdy(last_book_str)
+```
+
+```{r}
+# Number of days
+interval(first_book_date, last_book_date) / days(1)
+
+# Number of years
+interval(first_book_date, last_book_date) / years(1)
+```
+
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

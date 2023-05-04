@@ -1,0 +1,127 @@
+---
+title: "Lecture [13b] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1
+
+a) Use `if_else()` to add a new variable to `mpg` called `size` that equals “LARGE” if class is “suv”, “minivan”, or “pickup” and equals “SMALL” otherwise. Then select the `model`, `class`, and `size` variables.
+
+b) For practice, repeat the first part of this question but this time use `case_when()`. Is the Subaru Forester AWD model LARGE or SMALL?
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Part (a)**
+
+```{r}
+#| message: false
+
+library(tidyverse)
+
+mpg |> 
+  mutate(
+    size = if_else(
+      condition = class %in% c("suv", "minivan", "pickup"),
+      true = "LARGE",
+      false = "SMALL"
+    )
+  ) |> 
+  select(model, class, size)
+```
+
+**Part (b)**
+```{r}
+mpg |> 
+  mutate(
+    size = case_when(
+      class == "suv" ~ "LARGE",
+      class == "minivan" ~ "LARGE",
+      class == "pickup" ~ "LARGE",
+      .default = "SMALL"
+    )
+  ) |> 
+  select(model, class, size) |> 
+  filter(model == "forester awd")
+```
+
+The Subaru Forester AWD is LARGE.
+
+</blockquote></details></p>
+
+
+## Question 2
+
+a) Create a custom function called `nroot` that takes in two arguments, `x` and `n`, and returns the value of `x` raised to the power of `(1 / n)`. Test your function by calculating the cube-root of 343 (i.e., set `n` to 3).
+
+b) Set the default value for the `n` argument to be 2 (i.e., make `nroot(x)` equal to `sqrt(x)` by default). Test this default by calculating the square root of 121 using your function but without specifying `n`.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+**Part (a)**
+
+```{r}
+nroot <- function(x, n) {
+  x ^ (1 / n)
+}
+
+nroot(343, n = 3)
+```
+
+**Part (b)**
+
+```{r}
+nroot <- function(x, n = 2) {
+  x ^ (1 / n)
+}
+
+nroot(121)
+```
+
+</blockquote></details></p>
+
+
+## Challenge
+
+a) Use `$` operator to extract the vector of `country` names from the `population` tibble (included in \{tidyverse\}). Then use the `unique()` function on this vector so that each country name is only included once.
+
+b) Create a custom function that filters `population` to only include the data from a single country (specified by an argument) and then writes the results to a separate csv data file named after that country.
+
+c) Test your function on one country and, once it is working, use `walk()` to apply this function to the vector of all countries created in part (a).
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Part (a)**
+
+```{r}
+countries <- unique(population$country)
+```
+
+**Part (b)**
+```{r}
+save_country_data <- function(country_name) {
+  df <- population |> filter(country == country_name)
+  csv_filename <- str_glue("data/{country_name}.csv")
+  write_csv(df, csv_filename)
+}
+```
+
+**Part (c)**
+```{r}
+#| eval: false
+
+save_country_data("China")
+walk(.x = countries, .f = save_country_data)
+```
+
+</blockquote></details></p>
+
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

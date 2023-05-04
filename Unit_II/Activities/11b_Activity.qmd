@@ -1,0 +1,101 @@
+---
+title: "Lecture [11b] Activity"
+---
+
+![](../../img/programmer_2780E3.svg){.hero}
+
+## Question 1
+
+Install and load the \{Lahman\} package, which contains data about baseball teams and players.
+
+a. Explore how the `People`, `Batting`, and `Salaries` tables are connected.
+
+b. How would you join this data to compare the salaries of right-handed and left-handed batters? Do so using a \{tidyverse\} function and select only the relevant variables.
+
+*Note: These tables are data frames not tibbles (so they will print a **lot** of rows). To fix this, you can use `as_tibble()` to convert them to tibbles.*
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+All three tables are connected via the `playerID` variable.
+
+**Answer (b)**
+
+```{r}
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(Lahman) # must be installed first
+
+joined_data <- 
+  inner_join(People, Salaries, by = "playerID") |>  
+  select(playerID, nameFirst, nameLast, bats, yearID, teamID, salary) |>
+  as_tibble() |> 
+  print()
+```
+
+
+</blockquote></details></p>
+
+## Question 2
+
+a. Join the `band_members` and `band_instruments` tibbles (included in \{tidyverse\}) using all four basic types of joins. Compare the results.
+
+b. Now join the `band_members` and `band_instruments2` tibbles in a way that adds the instrument played by each name in `band_members.`
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+```{r}
+left_join(band_members, band_instruments, by = "name")
+right_join(band_members, band_instruments, by = "name")
+inner_join(band_members, band_instruments, by = "name")
+full_join(band_members, band_instruments, by = "name")
+```
+
+**Answer (b)**
+```{r}
+left_join(band_members, band_instruments2, by = c("name" = "artist"))
+```
+
+
+
+</blockquote></details></p>
+
+## Question 3
+
+Explore what happens when you join two tables with duplicated/repeated keys.
+
+```{r}
+x <- tibble(
+  key = c(1, 2, 2, 3),
+  val_x = c("x1", "x2", "x3", "x4")
+)
+y <- tibble(
+  key = c(1, 2, 2, 3),
+  val_y = c("y1", "y2", "y3", "y4")
+)
+```
+
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+left_join(x, y, by = "key")
+```
+
+The key gets duplicated for each pairwise combination.
+
+</blockquote></details></p>
+
+---
+
+*Note that there is no need to turn in Activities. These are just for practice!*

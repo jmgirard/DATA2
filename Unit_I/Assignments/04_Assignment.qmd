@@ -1,0 +1,100 @@
+---
+title: "Week 04 Assignment"
+---
+
+![](../../img/programming_357EDD.svg){.hero}
+
+## Instructions
+
+*Create a new Quarto document (HTML format), clear out the boilerplate code/text, and use this document to store your answers to each of the six questions below. Be sure to enable `embed-resources` using the header below. If your answer involves writing text, then use markdown to write 2--4 sentences per question; if you answer involves running code, then use one or more code chunks. For questions that ask you to fix code, correct any errors (while achieving the stated goal) and include only the working code in your document.*
+
+```markdown
+---
+format: 
+  html:
+    embed-resources: true
+---
+```
+
+*Please clearly mark which part of your document is answering which question (e.g., using markdown headings) and remove any "scratch work" or failed attempts from your document before submitting it. Finally, note that many essay-style questions will require you to read between the lines and use your imagination (as opposed to just looking up the answer in the lecture).*
+
+
+## Question 1
+
+The following table summarizes the critical response to HBO's *Game of Thrones* show by season (i.e., how much reviewers from the Rotten Tomatoes and Metacritic websites liked that season). 
+
+![](../../img/game_of_thrones_wikipedia.png)
+
+a) Would this data be considered tidy in its present form? Why or why not?
+
+b) Create a new version of this data that would qualify as tidy (i.e., that follows the tidy data principles) and save it in R to a tibble. To facilitate computation, each variable should be numerical. You should ignore the blue numbers in square brackets (these were links to source information).
+
+<p><details><summary>Hint</summary>
+
+> I recommend making it an 8 x 5 tibble. Try to pick good names for the variables that are clear and relatively short!
+
+</details></p>
+
+
+## Question 2
+
+Create a pipeline to take the tibble you created in Question 1 and then add a new variable to it that counts the total number of reviews that each season received (across both websites) and then sort the rows so that the seasons with the *most* total reviews appear at the top and the seasons with the *fewest* total reviews appear at the bottom.
+
+
+## Question 3
+
+The following table contains information about the 1973 album "The Dark Side of the Moon" by the band *Pink Floyd*. 
+
+![](../../img/dark_side_wikipedia.png)
+
+List two reasons why this data would not be considered tidy (i.e., what tidy data principles does it violate?).
+
+## Question 4
+
+Create a new version of the data from Question 3 that would qualify as tidy (i.e., that follows the tidy data principles) and save it in R to one or more tibbles. Use your best judgment to decide how to resolve the issues (e.g., should this be one or two tibbles?, how should the length variable be stored?, should certain pieces of information be removed from the data?).
+
+<p><details><summary>Hint</summary>
+
+> This question is intentionally a bit open-ended because data in the real world is often open-ended. By this, I mean that there is not just one obvious correct answer here, but rather there are different choices you could make. So, just do your best to capture the most important data in a tidy way. Also note that you only need to use skills you learned in this course (e.g., there are ways to store time data in R but we haven't learned that yet so I don't expect you to do that here - storing that data as simple numbers or strings would be fine).
+
+</details></p>
+
+
+## Question 5
+
+Download the `example4.csv` data file from Canvas and read it into R as a tibble. Print it and examine its structure. Your goal in this question is to create a pipeline with wrangling verbs that perfectly recreates the following output from that tibble. (Note that the numbers 1 to 5 in the leftmost column of the output are *not* part of the tibble; they are just the row numbers and part of how R prints a tibble.)
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+x <- tibble(
+  id = 1:10,
+  group = c(2, 1, 1, 2, 1, 2, 2, 1, 2, 1),
+  score = c(-0.1, 1.7, 0.4, 2.6, 1.9, -0.3, 0.2, -1.6, -1.5, 2.2)
+)
+write_csv(x, "../../data/example4.csv")
+
+x |> 
+  filter(group == 2) |> 
+  select(id, score) |> 
+  print()
+```
+<p><details><summary>Hint</summary>
+
+> I created this output using two verbs (after reading it in). I can think of at least two ways to accomplish this using what we have learned so far, and both would be acceptable answers.
+
+</details></p>
+
+
+## Question 6
+
+a) Why should we take the time to tidy our data? What might go wrong if we tried to work with non-tidy data in R?
+
+b) What is a tibble? What are a few advantages of using a tibble rather than, say, separate vector objects?
+
+
+---
+
+✅ Done! *Please save and then render your document to an HTML file. Check it over to make sure it is complete (and rendered properly) and then upload this file to Canvas by the deadline listed on the syllabus. Note that, if any of your code chunks has an error in it, the HTML file will not render properly (this is why removing scratch work is important).*

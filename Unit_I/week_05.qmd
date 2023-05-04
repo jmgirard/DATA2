@@ -1,0 +1,67 @@
+---
+title: "Week 5: Visualize"
+format:
+  html:
+    page-layout: full
+---
+
+## [05a] ggplot2 Basics
+
+### Topics
+
+- Principles
+- Scatterplots
+- Aesthetics
+
+### Slides
+
+<iframe class="slide-deck" src="./Presentations/05a_Slides.html" title="[05a] Presentation">
+</iframe>
+
+[Click here to view the slides in their own window.](./Presentations/05a_Slides.html)
+
+### Recording
+
+<iframe id="kmsembed-1_w71d3rpr" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_w71d3rpr/uiConfId/45147491/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="399/800 Lecture [05a]"></iframe>
+
+### Activity
+
+- [Activity \[05a\]](./Activities/05a_Activity.html)
+
+
+## [05b] More ggplot2
+
+### Topics
+
+- Variation
+- Covariation
+- Layering
+
+### Slides
+
+<iframe class="slide-deck" src="./Presentations/05b_Slides.html" title="[05b] Presentation">
+</iframe>
+
+### Recording
+
+<iframe id="kmsembed-1_uesfzsvy" width="400" height="285" src="https://mediahub.ku.edu/embed/secure/iframe/entryId/1_uesfzsvy/uiConfId/45147491/st/0" class="kmsembed" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="399/800 Lecture [05b]"></iframe>
+
+### Data Files
+
+- <a href="../data/salaries.csv" download="salaries.csv">salaries.csv</a>
+
+### Activity
+
+- [Activity \[05b\]](./Activities/05b_Activity.html)
+
+### Optional Readings
+
+- <https://r4ds.had.co.nz/data-visualisation.html>
+- <https://r4ds.had.co.nz/exploratory-data-analysis.html>
+
+
+## Week 5 Assignment
+
+### Instructions
+
+- [Week 5 Assignment](./Assignments/05_Assignment.html)
