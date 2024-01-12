@@ -71,14 +71,14 @@
 /* Style for inline code */
 .reveal p code, .reveal li code, .reveal td code {
   padding: 2px 9px;
-  background-color: #303030;
+  background-color: #F4F4F4;
   border-radius: 4px;
 }
 
 /* Style for code chunk */
 .reveal pre.sourceCode code {
   color: #ccc;
-  background-color: #303030;
+  background-color: #F4F4F4;
   padding: 6px 9px;
   min-height: 550px;
   max-height: 550px;
